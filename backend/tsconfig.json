@@ -1,11 +1,11 @@
-{
-  "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "baseUrl": ".",
-    "outDir": "dist",
-    "sourceMap": true,
-    "noImplicitAny": true
-  },
-  "include": ["src/**/*", "./src/app.js"]
-}
+// {
+//   "compilerOptions": {
+//     "module": "NodeNext",
+//     "moduleResolution": "NodeNext",
+//     "baseUrl": ".",
+//     "outDir": "dist",
+//     "sourceMap": true,
+//     "noImplicitAny": true
+//   },
+//   "include": ["api/**/*", "./api/app.js"]
+// }
