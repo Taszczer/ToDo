@@ -24,3 +24,7 @@ router.get('/test', (req, res) => {
 });
 
 module.exports = router;
+
+//mongodb+srv://Taszczer:FAg0Q27SzJf7rxPr@database.4qapfqd.mongodb.net/
+
+//FAg0Q27SzJf7rxPr

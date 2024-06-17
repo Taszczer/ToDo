@@ -5,6 +5,7 @@ const port = 5000;
 
 app.use(cors());
 app.use('/', require('./routes/main.js'))
+app.use('/', require('./config/mongodb.js'))
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
