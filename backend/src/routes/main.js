@@ -18,14 +18,31 @@ const requestTime = (req, res, next) => {
 
 router.use(requestTime);
 
-function insertPostData() {
-    Post.insertMany({
-        title: 'This is first post',
-        description: 'I really have fun doing that stuff:)',
-        author: 'Taszczer'
-    })
-}
-insertPostData()
+// function insertPostData() {
+//     Post.insertMany({
+//         title: 'This is first post',
+//         description: 'I really have fun doing that stuff:)',
+//         author: 'Taszczer'
+//     })
+// }
+// insertPostData()
+
+router.post('/posts', async (req, res) => {
+    const { title, description, author } = req.body;
+    try {
+        const newPost = new Post({
+            title,
+            description,
+            author
+        });
+
+        await newPost.save();
+        res.status(201).send('Post created successfully.');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error creating post: ' + err.message);
+    }
+});
 
 router.get('/test', (req, res) => {
     let responseText = 'Button was clicked ';
