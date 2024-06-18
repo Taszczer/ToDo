@@ -1,4 +1,5 @@
 const express = require('express');
+const Post = require('../models/post');
 const router = express.Router();
 
 const requestTime = (req, res, next) => {
@@ -16,6 +17,15 @@ const requestTime = (req, res, next) => {
 }
 
 router.use(requestTime);
+
+function insertPostData() {
+    Post.insertMany({
+        title: 'This is first post',
+        description: 'I really have fun doing that stuff:)',
+        author: 'Taszczer'
+    })
+}
+insertPostData()
 
 router.get('/test', (req, res) => {
     let responseText = 'Button was clicked ';
