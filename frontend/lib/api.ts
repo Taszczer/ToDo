@@ -8,10 +8,3 @@ export async function Test() {
         console.log('Error:', error);
     }
 } 
-
-export async function createPost(data:any) {
-    const res = await axios.post('http://localhost:5000/posts', {
-        data
-    })
-    return res
-}

@@ -35,11 +35,13 @@ export default function CreatePost() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" {...register("title")} />
-        <input type="text" {...register("description")} />
-        <input type="text" {...register("author")} />
-        <button type="submit" disabled={isSubmitting}>Create Post</button>
+      <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col '>
+        <div className=' w-[400px] gap-5'>
+        <input className=' bg-slate-400' type="text" {...register("title")} />
+        <input className=' bg-slate-400' type="text" {...register("description")} />
+        <input className=' bg-slate-400' type="text" {...register("author")} />
+        <button className=' bg-slate-400' type="submit" disabled={isSubmitting}>Create Post</button>
+        </div>
       </form>
     </div>
   );
