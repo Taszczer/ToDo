@@ -7,6 +7,8 @@ import axios from 'axios';
 // import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { Input } from '@/components/Input';
+import { Button } from '@/components/Button';
 
 export default function CreatePost() {
   // const router = useRouter();
@@ -36,11 +38,11 @@ export default function CreatePost() {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col '>
-        <div className=' w-[400px] gap-5'>
-        <input className=' bg-slate-400' type="text" {...register("title")} />
-        <input className=' bg-slate-400' type="text" {...register("description")} />
-        <input className=' bg-slate-400' type="text" {...register("author")} />
-        <button className=' bg-slate-400' type="submit" disabled={isSubmitting}>Create Post</button>
+        <div className='gap-5'>
+          <Input className=' ' placeholder='tytuł' type="text" {...register("title")} />
+          <Input className='mt-2 placeholder:text-white h-[65px]' placeholder='opis' type="text" {...register("description")} />
+          <Input className=' mt-2' placeholder='autor' type="text" {...register("author")} />
+          <Button name='Stwórz zadanie' className=' ' type="submit" disabled={isSubmitting}/>
         </div>
       </form>
     </div>
