@@ -8,9 +8,6 @@ const port = 5000;
 app.use(cors());
 app.use('/', require('./routes/main.js'))
 connectDB()
-// firstPost()
-
-// await firstPost.save()
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
