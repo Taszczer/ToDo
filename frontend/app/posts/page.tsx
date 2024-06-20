@@ -1,5 +1,6 @@
 "use client"
 
+import { deletePost } from "@/lib/api"
 import { Post } from "@/lib/types"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
@@ -28,6 +29,13 @@ export default function Posts() {
                     <h2>{post.title}</h2>
                     <p>{post.description}</p>
                     <p>{post.author}</p>
+                    {/* <p>{post.date}</p> */}
+                    <button onClick={() => {
+                        deletePost(post._id);
+                        window.location.reload()
+                    }}>
+                        usuń quest
+                    </button>
                 </div>
             ))}
         </div>

@@ -31,7 +31,7 @@ router.post('/posts/create', async (req, res) => {
         res.status(201).send('Post created successfully.');
     } catch (err) {
         console.error(err);
-        res.status(500).send('Error creating post: ' + err.message);
+        res.status(500).send(`Error creating post: ${err.message}`);
     }
 });
 
@@ -40,15 +40,29 @@ router.get('/posts', async (req, res) => {
         const post = await Post.find({})
         res.status(200).json(post)
     } catch (err) {
-        res.status(500).send('Error getting posts: ' + err.message)
+        res.status(500).send(`Error getting posts: ${err.message}`)
     }
 })
 
-// router.get('/test', (req, res) => {
-//     let responseText = 'Button was clicked ';
-//     responseText += `at: ${req.formattedRequestTime}`;
-//     res.send(responseText);
-// });
+router.get('/posts/:id', async (req, res) => {
+    try {
+        const id = req.params
+        const postId = await Post.findById({ id })
+        res.status(200).json(postId)
+    } catch (err) {
+        res.status(500).send(`Your error is: ${err.message}`)
+    }
+})
+
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const postDelete = await Post.deleteOne({ _id: req.params.id })
+        res.status(204).json(postDelete)
+
+    } catch (err) {
+        res.status(500).send(`Your error is: ${err.message}`)
+    }
+})
 
 module.exports = router;
 

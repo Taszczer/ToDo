@@ -4,14 +4,14 @@ import { createSchema, CreateSchema } from '@/lib/types';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { Input } from '@/components/Input';
+import Input from '@/components/Input';
 import { Button } from '@/components/Button';
 
 export default function CreatePost() {
-  // const router = useRouter();
+  const router = useRouter();
 
   const { register, handleSubmit, formState: { isSubmitting } } = useForm<CreateSchema>({
     resolver: zodResolver(createSchema)
@@ -23,7 +23,7 @@ export default function CreatePost() {
     },
     onSuccess: () => {
       toast.success('Zadanie zostało stworzone');
-      // router.push('/');
+      router.push('/posts');
     },
     onError: (error) => {
       toast.error("Coś poszło nie tak");
