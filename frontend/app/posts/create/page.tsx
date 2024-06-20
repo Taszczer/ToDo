@@ -19,7 +19,7 @@ export default function CreatePost() {
 
   const mutation = useMutation({
     mutationFn: (newToDo: CreateSchema) => {
-      return axios.post('http://localhost:5000/posts', newToDo);
+      return axios.post('http://localhost:5000/posts/create', newToDo);
     },
     onSuccess: () => {
       toast.success('Zadanie zostało stworzone');
