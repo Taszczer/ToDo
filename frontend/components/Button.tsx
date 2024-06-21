@@ -24,7 +24,7 @@ export const Button: FC<ButtonProps> = ({
         type={type}
         disabled={disabled}
         onClick={onClick}
-        className={`${className} w-[250px] mt-2 font-bold text-purple-700 rounded-xl bg-purple-300 border-b-4 border-r-purple-500 border-b-purple-500 placeholder:text-purple-500 placeholder:font-bold border-r-4 px-4 py-1`}
+        className={`${className} mt-2 font-bold text-white rounded-xl bg-orange-primary border-b-4 border-r-orange-secondary border-b-orange-secondary border-r-4 px-4 py-1`}
       >
         {name}
       </button>
