@@ -4,16 +4,18 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
 export default function ResourceCalendar() {
-  const handleDateClick = (arg) => {
+  const handleDateClick = (arg:any) => {
     alert(arg.dateStr);
   };
 
-  const renderEventContent = (eventInfo) => {
+  const renderEventContent = (eventInfo:any) => {
     return (
-      <div>
+      <div className='flex flex-col justify-between py-3    px-4 h-full'>
+        <div>
+          <h1 className=' font-bold text-xl'>{eventInfo.event.title}</h1>
+          <p>{eventInfo.event.extendedProps.description}</p>
+        </div>
         <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
-        <p>{eventInfo.event.extendedProps.description}</p>
       </div>
     );
   };
@@ -22,7 +24,6 @@ export default function ResourceCalendar() {
     <div className='max-h-[80%]'>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin, resourceTimeGridPlugin]}
-        initialView='resourceTimeGridWeek'
         dateClick={handleDateClick}
         eventContent={renderEventContent}
         resources={[
@@ -34,7 +35,7 @@ export default function ResourceCalendar() {
             resourceId: 'a', 
             title: 'Event 1', 
             start: '2024-06-22T10:00:00', 
-            end: '2024-06-22T12:00:00',
+            end: '2024-06-22T16:00:00',
             extendedProps: {
               description: 'Description for Event 1'
             }

@@ -2,29 +2,15 @@ const express = require('express');
 const Post = require('../models/post');
 const router = express.Router();
 
-// const requestTime = (req, res, next) => {
-//     req.requestTime = Date.now();
-//     const date = new Date(req.requestTime);
-//     const day = date.getDate();
-//     const month = date.getMonth() + 1;
-//     const year = date.getFullYear();
-
-//     const hours = date.getHours();
-//     const minutes = ("0" + date.getMinutes()).slice(-2);
-
-//     req.formattedRequestTime = `${hours}:${minutes}  ${day}/${month}.${year}`;
-//     next();
-// }
-
-// router.use(requestTime);
-
 router.post('/posts/create', async (req, res) => {
-    const { title, description, author } = req.body;
+    const { title, description, author, start_time, end_time } = req.body;
     try {
         const newPost = new Post({
             title,
             description,
-            author
+            author,
+            start_time,
+            end_time
         });
 
         await newPost.save();
@@ -67,5 +53,3 @@ router.delete('/delete/:id', async (req, res) => {
 module.exports = router;
 
 //mongodb+srv://Taszczer:FAg0Q27SzJf7rxPr@database.4qapfqd.mongodb.net/
-
-//FAg0Q27SzJf7rxPr
