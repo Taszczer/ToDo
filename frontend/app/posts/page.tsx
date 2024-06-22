@@ -26,7 +26,7 @@ export default function Posts() {
     return (
         <div className=" items-center flex flex-col justify-center">
             {data?.map((post) => (
-                <div key={post._id} className="mt-4 rounded-lg border-0 text-white  border-b-8 border-r-8 border-orange-primary shadow-md shadow-orange-primary bg-[#F9C784] py-4 px-6 min-w-[250px] min-h-[300px]">
+                <div key={post._id} className="mt-4 rounded-lg border-0 text-white  border-b-8 border-r-8 border-orange-primary shadow-md shadow-orange-primary bg-[#F9C784] py-4 px-6 min-w-[250px] max-w-[250px] min-h-[300px]">
                     <div className="mb-[125px]">
                         <h2 className="font-bold text-xl capitalize">{post.title}</h2>
                         <p>{post.description}</p>

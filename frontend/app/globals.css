@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fc .fc-scrollgrid-liquid {
+    height: 50%;
+}
