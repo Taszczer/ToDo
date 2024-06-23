@@ -6,7 +6,9 @@ export default function Home() {
   return (
     <main className="">
       {/* <p>kdafjkld</p> */}
-      <Calendar/>
+      <div className=" max-w-[70%]">
+        <Calendar/>
+      </div>
     </main>
   );
 }
