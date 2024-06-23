@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 .fc .fc-scrollgrid-liquid {
-    height: 50%;
+    height: 62%;
+    width: 80%;
 }
 
 .fc-v-event {
@@ -12,4 +13,12 @@
     border-color: #FF8C42;
     border-radius: 5%;
     display: block;
+}
+
+.fc-direction-ltr{
+    color: #FF8C42;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+    border: 0
 }

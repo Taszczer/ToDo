@@ -17,12 +17,8 @@ export default function ResourceCalendar() {
       return response.data
     }
   })
-  
-  const handleDateClick = (arg) => {
-    alert(arg.dateStr);
-  };
 
-  const renderEventContent = (eventInfo) => {
+  const renderEventContent = (eventInfo: any) => {
     return (
       <div className='flex flex-col h-full justify-between px-4 py-2'>
         <div>
@@ -50,7 +46,6 @@ export default function ResourceCalendar() {
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin, resourceTimeGridPlugin]}
         initialView='resourceTimeGridWeek'
-        dateClick={handleDateClick}
         eventContent={renderEventContent}
         resources={[
           { id: 'a', title: 'Resource A' },
