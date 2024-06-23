@@ -18,7 +18,7 @@ export const Button: FC<ButtonProps> = ({
   type = 'button',
 }) => {
   return (
-    <div>
+    <div className='flex justify-end'>
       <label htmlFor={label}>{label}</label>
       <button
         type={type}

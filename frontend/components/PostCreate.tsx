@@ -23,7 +23,7 @@ export default function CreatePost() {
     },
     onSuccess: () => {
       toast.success('Zadanie zostało stworzone');
-      router.push('/posts');
+      window.location.reload()
     },
     onError: (error) => {
       toast.error("Coś poszło nie tak");
@@ -36,19 +36,20 @@ export default function CreatePost() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col '>
-        <div className='gap-5'>
-          <Input className=' ' placeholder='tytuł' type="text" {...register("title")} />
-          <Input className='mt-2 placeholder:text-white h-[65px]' placeholder='opis' type="text" {...register("description")} />
-          <Input className=' mt-2' placeholder='autor' type="text" {...register("author")} />
-          <div>
-            <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("start_time")} />
-            <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("end_time")} />
-          </div>
-          <Button name='Stwórz zadanie' className=' w-[250px] ' type="submit" disabled={isSubmitting}/>
-        </div>
-      </form>
+      <div className='flex flex-col items-center'>
+        <h1>Tutaj możesz zrobić nowego taska</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col items-center'>
+            <div className='gap-5'>
+            <Input className=' ' placeholder='tytuł' type="text" {...register("title")} />
+            <Input className='mt-2 placeholder:text-white h-[65px]' placeholder='opis' type="text" {...register("description")} />
+            <Input className=' mt-2' placeholder='autor' type="text" {...register("author")} />
+            <div>
+                <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("start_time")} />
+                <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("end_time")} />
+            </div>
+            <Button name='Stwórz zadanie' className=' w-[250px] ' type="submit" disabled={isSubmitting}/>
+            </div>
+        </form>
     </div>
   );
 }
