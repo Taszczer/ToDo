@@ -23,6 +23,13 @@ export default function Posts() {
         console.log(error)
     }
 
+    function formatTime(res: Date | string) {
+        const date = new Date(res);
+        const hours = date.getUTCHours().toString().padStart(2, '0');
+        const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }       
+
     return (
         <div className=" items-center flex flex-col justify-center">
             {data?.map((post) => (
@@ -31,6 +38,7 @@ export default function Posts() {
                         <h2 className="font-bold text-xl capitalize">{post.title}</h2>
                         <p>{post.description}</p>
                     </div>
+                    <p>{ formatTime(post.start_time) } - { formatTime(post.end_time) }</p>
                     <p className="font-bold">autor: {post.author}</p>
                     {/* <p>{post.date}</p> */}
                     <Button

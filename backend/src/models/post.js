@@ -4,10 +4,8 @@ const PostSchema = new mongoose.Schema({
     title: String,
     description: String,
     author: String,
-    date: {
-        type: Date,
-        default: Date.now,
-    }
+    start_time: Date,
+    end_time: Date
 })
 
 const Post = mongoose.model('Post', PostSchema)

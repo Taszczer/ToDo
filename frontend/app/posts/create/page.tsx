@@ -42,8 +42,10 @@ export default function CreatePost() {
           <Input className=' ' placeholder='tytuł' type="text" {...register("title")} />
           <Input className='mt-2 placeholder:text-white h-[65px]' placeholder='opis' type="text" {...register("description")} />
           <Input className=' mt-2' placeholder='autor' type="text" {...register("author")} />
-            <input className=' mt-2' placeholder='autor' type="datetime-local" {...register("start_time")} />
-            <input className=' mt-2' placeholder='autor' type="datetime-local" {...register("end_time")} />
+          <div>
+            <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("start_time")} />
+            <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("end_time")} />
+          </div>
           <Button name='Stwórz zadanie' className=' w-[250px] ' type="submit" disabled={isSubmitting}/>
         </div>
       </form>

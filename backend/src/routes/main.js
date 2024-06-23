@@ -2,6 +2,7 @@ const express = require('express');
 const Post = require('../models/post');
 const router = express.Router();
 
+
 router.post('/posts/create', async (req, res) => {
     const { title, description, author, start_time, end_time } = req.body;
     try {
