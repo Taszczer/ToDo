@@ -5,3 +5,11 @@
 .fc .fc-scrollgrid-liquid {
     height: 50%;
 }
+
+.fc-v-event {
+    background-color: #F9C784;
+    border-width: 0 4px 4px 0 ;
+    border-color: #FF8C42;
+    border-radius: 5%;
+    display: block;
+}
