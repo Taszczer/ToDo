@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 const PostSchema = new mongoose.Schema({
     title: String,
     description: String,
-    author: String,
     start_time: Date,
     end_time: Date
 })

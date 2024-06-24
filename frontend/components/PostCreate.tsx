@@ -42,7 +42,6 @@ export default function CreatePost() {
             <div className='gap-5'>
             <Input className=' ' placeholder='tytuł' type="text" {...register("title")} />
             <Input className='mt-2 placeholder:text-white h-[65px]' placeholder='opis' type="text" {...register("description")} />
-            <Input className=' mt-2' placeholder='autor' type="text" {...register("author")} />
             <div>
                 <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("start_time")} />
                 <Input className=' mt-2' placeholder='autor' type="datetime-local" {...register("end_time")} />
