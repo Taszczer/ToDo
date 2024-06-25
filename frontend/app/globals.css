@@ -27,3 +27,8 @@
     display: flex;
     justify-content: space-between;   
 }
+
+.fc-toolbar-title{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: large;
+}
