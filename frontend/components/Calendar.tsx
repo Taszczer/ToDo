@@ -49,7 +49,8 @@ export default function ResourceCalendar() {
         {durationInHours <= 1 ?
           (
             <div className={`flex flex-col h-full justify-between px-4 py-2`}>
-              <Button name='Zobacz więcej' className='flex justify-center items-center' onClick={() =>{ setIsOpen(true) }}/>  
+              <Button name='Zobacz więcej' className='flex justify-center items-center' onClick={() => { setIsOpen(true) }} />
+              <SeeMoreDialog isOpen={isOpen} setIsOpen={setIsOpen} title={eventInfo.event.title} description={eventInfo.event.extendedProps.description} time={eventInfo.timeText} />
             </div>
           )
           :
@@ -80,7 +81,6 @@ export default function ResourceCalendar() {
         resourceAreaWidth='300px'
         resourceAreaHeaderContent='Resources'
       />
-      <SeeMoreDialog isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }

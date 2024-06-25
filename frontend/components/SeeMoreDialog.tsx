@@ -2,7 +2,8 @@ import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Transition } from '@headlessui/react'
 
-export default function SeeMoreDialog({ isOpen, setIsOpen }: any) {
+export default function SeeMoreDialog({ isOpen, setIsOpen, title, description, time }: any) {
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -17,12 +18,14 @@ export default function SeeMoreDialog({ isOpen, setIsOpen }: any) {
             leaveTo="opacity-0 scale-95"
           >
             <div className="fixed inset-0 flex items-center justify-center p-4">
-              <Dialog.Panel className="max-w-lg space-y-4 border bg-white p-12 shadow-lg transform transition-all">
-                <DialogTitle className="font-bold">dfaf</DialogTitle>
-                <Dialog.Description>fdafdaf</Dialog.Description>
-                <p>dkfjakljkflda</p>
-                <div className="flex gap-4">
-                  <button className="px-4 py-2 bg-gray-200 rounded" onClick={() => setIsOpen(false)}>Cancel</button>
+              <Dialog.Panel className="max-w-lg space-y-4 border rounded-xl bg-white min-h-[400px] min-w-[300px] p-12 shadow-lg transform transition-all">
+                <DialogTitle className="font-bold text-2xl">{title}</DialogTitle>
+                <Dialog.Description className="font-medium text-md">{description}</Dialog.Description>
+                <div className='flex justify-between'>
+                  <p>{time}</p>
+                  <div className="flex gap-4">
+                    <button className="" onClick={() => setIsOpen(false)}>x</button>
+                  </div>
                 </div>
               </Dialog.Panel>
             </div>

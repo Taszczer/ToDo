@@ -39,7 +39,6 @@ export default function Posts() {
                         <p>{post.description}</p>
                     </div>
                     <p>{ formatTime(post.start_time) } - { formatTime(post.end_time) }</p>
-                    <p className="font-bold">autor: {post.author}</p>
                     {/* <p>{post.date}</p> */}
                     <Button
                         className="w-[200px]"
