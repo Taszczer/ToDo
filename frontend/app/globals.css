@@ -22,3 +22,8 @@
 .fc-theme-standard .fc-scrollgrid {
     border: 0
 }
+
+.fc-header-toolbar .fc-toolbar {
+    display: flex;
+    justify-content: space-between;   
+}

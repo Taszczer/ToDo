@@ -18,13 +18,13 @@ export const Button: FC<ButtonProps> = ({
   type = 'button',
 }) => {
   return (
-    <div className='flex justify-end'>
+    <div className='flex justify-center'>
       <label htmlFor={label}>{label}</label>
       <button
         type={type}
         disabled={disabled}
         onClick={onClick}
-        className={`${className} mt-2 font-bold text-white rounded-xl bg-orange-primary border-b-4 border-r-orange-secondary border-b-orange-secondary border-r-4 px-4 py-1`}
+        className={`${className} font-bold text-white rounded-xl bg-orange-primary border-b-4 border-r-orange-secondary border-b-orange-secondary border-r-4 px-4 py-1`}
       >
         {name}
       </button>
