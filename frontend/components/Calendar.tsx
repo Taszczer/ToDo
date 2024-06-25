@@ -8,8 +8,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Post } from '@/lib/types';
 import { Button } from './Button';
+import { useState } from 'react';
+import SeeMoreDialog from './SeeMoreDialog';
 
 export default function ResourceCalendar() {
+
+  let [isOpen, setIsOpen] = useState(false)
+
   const { isLoading, data, error } = useQuery({
     queryKey: ['todo'],
     queryFn: async () => {
@@ -40,18 +45,18 @@ export default function ResourceCalendar() {
     const durationInHours = eventInfo.event.extendedProps.durationInHours
 
     return (
-      <div>
+      <div className='h-full'>
         {durationInHours <= 1 ?
           (
             <div className={`flex flex-col h-full justify-between px-4 py-2`}>
-              <Button name='Zobacz więcej' className='flex justify-center items-center'/>  
+              <Button name='Zobacz więcej' className='flex justify-center items-center' onClick={() =>{ setIsOpen(true) }}/>  
             </div>
           )
           :
           (
             <div className={`flex flex-col h-full justify-between px-4 py-2`}>
               <div>
-                <p className={`font-bold `}>{eventInfo.event.title}</p>
+                <p className={`font-bold text-lg`}>{eventInfo.event.title}</p>
                 <p className='font-medium text-md'>{eventInfo.event.extendedProps.description}</p>
               </div>
               <b>{eventInfo.timeText}</b>
@@ -75,6 +80,7 @@ export default function ResourceCalendar() {
         resourceAreaWidth='300px'
         resourceAreaHeaderContent='Resources'
       />
+      <SeeMoreDialog isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }

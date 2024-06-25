@@ -4,14 +4,12 @@ import { createSchema, CreateSchema } from '@/lib/types';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import Input from '@/components/Input';
 import { Button } from '@/components/Button';
 
 export default function CreatePost() {
-  const router = useRouter();
 
   const { register, handleSubmit, formState: { isSubmitting } } = useForm<CreateSchema>({
     resolver: zodResolver(createSchema)
@@ -46,7 +44,7 @@ export default function CreatePost() {
                 <Input className=' mt-2 text-white font-bold' placeholder='autor' type="datetime-local" {...register("start_time")} />
                 <Input className=' mt-2 text-white font-bold' placeholder='autor' type="datetime-local" {...register("end_time")} />
             </div>
-            <Button name='Stwórz zadanie' className=' w-[250px] ' type="submit" disabled={isSubmitting}/>
+            <Button name='Stwórz zadanie' className=' w-[250px] mt-5' type="submit" disabled={isSubmitting}/>
             </div>
         </form>
     </div>
