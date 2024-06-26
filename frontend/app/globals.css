@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .fc .fc-scrollgrid-liquid {
-    height: 90%;
+    max-height: 85%;
     width: 100%;
 }
 
@@ -31,4 +31,16 @@
 .fc-toolbar-title{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: large;
+}
+
+.fc .fc-button-primary {
+    background-color: #FCE3C2;
+    border-color: #FCE3C2;
+    color: white;
+}
+
+.fc .fc-button-primary:hover {
+    background-color: #FF8C42;
+    border-color: #FF8C42;
+    color: white;
 }

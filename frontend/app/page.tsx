@@ -1,17 +1,20 @@
 'use client'
 
 import Calendar from "@/components/Calendar";
+import Note from "@/components/Note";
 import CreatePost from "@/components/PostCreate";
 
 export default function Home() {
   return (
-    <main className="">
-      {/* <p>kdafjkld</p> */}
+    <main>
       <div className="max-w-[70%]">
-        <Calendar />
-        <div className="absolute top-16 right-32">
+        <div className="mt-12 ml-10">
+          <Calendar />
+        </div>
+        <div className="absolute top-14 right-32 border-4 border-orange-secondary py-6 px-2 rounded-xl">
           <CreatePost/>
         </div>
+        <Note/>
       </div>
     </main>
   );
