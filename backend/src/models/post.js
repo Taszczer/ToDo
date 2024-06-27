@@ -7,11 +7,6 @@ const PostSchema = new mongoose.Schema({
     end_time: Date
 })
 
-const NoteSchema = new mongoose.Schema({
-    textFields: File
-})
-
-const Note = mongoose.model('Note', NoteSchema)
 const Post = mongoose.model('Post', PostSchema)
 
-module.exports = { Post, Note }
+module.exports = Post 
