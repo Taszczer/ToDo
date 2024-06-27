@@ -1,5 +1,8 @@
 const express = require('express');
+const multer = require("multer")
+const upload = multer({ dest: 'uploads/' })
 const Post = require('../models/post');
+const Note = require('../models/post')
 const router = express.Router();
 
 
@@ -47,6 +50,18 @@ router.delete('/delete/:id', async (req, res) => {
 
     } catch (err) {
         res.status(500).send(`Your error is: ${err.message}`)
+    }
+})
+
+router.post("/upload", upload.none(), async (req, res) => {
+    const textFields = req.body
+    try {
+        const newNote = new Note(textFields)
+
+        await newNote.save()
+        res.status(201).send(newNote)
+    } catch (err) {
+        res.status(500).send(`Your error is ${err}`)
     }
 })
 

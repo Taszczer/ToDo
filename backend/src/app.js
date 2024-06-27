@@ -1,7 +1,6 @@
 const cors = require('cors');
 const express = require('express');
 const connectDB = require('./config/mongodb.js');
-const firstPost = require('./models/post.js');
 const app = express();
 const port = 5000;
 
