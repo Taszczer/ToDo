@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/', require('./routes/main'));
+app.use('/', require('./routes/notes'));
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
