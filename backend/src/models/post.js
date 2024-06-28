@@ -1,12 +1,12 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
+const { db1 } = require('../connection/index')
 
-const PostSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
     title: String,
     description: String,
     start_time: Date,
-    end_time: Date
-})
+    end_time: Date,
+});
 
-const Post = mongoose.model('Post', PostSchema)
-
-module.exports = Post 
+const Post = db1.model('Post', postSchema);
+module.exports = Post;

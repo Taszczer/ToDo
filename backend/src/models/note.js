@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const { db2 } = require("../connection/index")
 
 const NoteSchema = new mongoose.Schema({
     name: {
@@ -23,6 +24,6 @@ const NoteSchema = new mongoose.Schema({
     }
 })
 
-const Note = mongoose.model('Note', NoteSchema)
+const Note = db2.model('Note', NoteSchema)
 
 module.exports = Note

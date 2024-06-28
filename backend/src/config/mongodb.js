@@ -1,12 +1,8 @@
-const mongoose = require('mongoose');
+module.exports = {
+    db1: 'mongodb+srv://Taszczer:FAg0Q27SzJf7rxPr@database.4qapfqd.mongodb.net/blog',
+    db2: 'mongodb+srv://Taszczer:FAg0Q27SzJf7rxPr@database.4qapfqd.mongodb.net/notebook',
+};
 
-const createDB = (dbname) => {
-    return (
-        mongoose.createConnection(`mongodb+srv://Taszczer:FAg0Q27SzJf7rxPr@database.4qapfqd.mongodb.net/${dbname}`, console.log(`${dbname} connected`))
-    )
-}
-
-module.exports = createDB
 // const connectDB = async () => {
 //     try {
 //         mongoose.set('strictQuery', false);
