@@ -44,3 +44,10 @@
     border-color: #FF8C42;
     color: white;
 }
+
+
+.tiptap {
+    position: absolute;
+    bottom: 30%;
+    right: 10%;
+  }
