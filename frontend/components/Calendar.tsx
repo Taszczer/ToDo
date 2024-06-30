@@ -31,7 +31,7 @@ export default function ResourceCalendar() {
     return {
       id: post._id.toString(),
       resourceId: 'a',
-      title: post.title.toString(),
+      title: post.title,
       start: post.start_time,
       end: post.end_time,
       extendedProps: {
