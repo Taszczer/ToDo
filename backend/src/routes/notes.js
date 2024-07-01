@@ -4,9 +4,9 @@ const router = express.Router();
 
 
 router.post("/notes/upload", async (req, res) => {
-    const { title, text } = req.body
+    const { title, descriptionText } = req.body
     try {
-        const newNote = new Note({ title, text })
+        const newNote = new Note({ title, descriptionText })
         await newNote.save()
         res.status(201).send(newNote)
     } catch (err) {

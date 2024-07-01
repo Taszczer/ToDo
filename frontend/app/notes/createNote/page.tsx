@@ -1,14 +1,22 @@
 'use client'
 
+import { Button } from "@/components/Button"
 import Input from "@/components/Input"
+import { createNoteSchema, CreateNoteSchema } from "@/lib/types"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 export default function CreateNote() {
-//add type for mutation
+
+    const { register, handleSubmit, formState:{isSubmitting} } = useForm<CreateNoteSchema>({
+        resolver: zodResolver(createNoteSchema)
+    })
+
     const mutation = useMutation({
-        mutationFn: async (newNote: any) => {
+        mutationFn: async (newNote: CreateNoteSchema) => {
             return axios.post("http://localhost:5000/notes/upload", newNote)
         },
 
@@ -21,16 +29,18 @@ export default function CreateNote() {
             console.log(error)
         }
     })
-//create type for data
-    const onSubmit = (data:any) => {
+
+    const onSubmit = (data:CreateNoteSchema) => {
         mutation.mutate({...data})
     }
 
     return (
         <div>
             <h1>+</h1>
-            <form onSubmit={onSubmit}>
-                <Input type="text"/>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Input type="text" {...register('title')} />
+                <Input type="text" {...register('descriptionText')} />
+                <Button name='Stwórz zadanie' className=' w-[250px] mt-5' type="submit" disabled={isSubmitting}/>
             </form>
         </div>
     )
