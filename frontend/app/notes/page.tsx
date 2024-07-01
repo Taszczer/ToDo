@@ -9,15 +9,20 @@ export default function NoteBook() {
     const { data, isLoading, error } = useQuery({
         queryKey: ['notes'],
         queryFn: async () => {
-            return (await axios.get<TNote>("http://localhost:5000/posts")).data
+            return (await axios.get<TNote[]>("http://localhost:5000/notes")).data
         }
     })
-
-    console.log(data)
     
+
     return (
         <div>
-            <h1></h1>
+            <h1>twoje notatki</h1>
+            {data?.map((note) => (
+                <div key={note._id}>
+                    <h1>{note.title}</h1>
+                    <p>{note.descriptionText}</p>
+                </div>
+            ))}
         </div>
     )
 }
