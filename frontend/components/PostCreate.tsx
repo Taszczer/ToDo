@@ -6,8 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import Input from '@/components/Input';
+
 import { Button } from '@/components/Button';
+import Input from './Input';
 
 export default function CreatePost() {
 

@@ -1,8 +1,6 @@
 'use client'
 
 import Calendar from "@/components/Calendar";
-// import TiptapEditor from "@/components/Note";
-// import Note from "@/components/Note";
 import CreatePost from "@/components/PostCreate";
 
 export default function Home() {
@@ -15,7 +13,6 @@ export default function Home() {
         <div className="absolute top-14 right-32 border-4 border-orange-secondary py-6 px-2 rounded-xl">
           <CreatePost/>
         </div>
-        {/* <TiptapEditor/> */}
       </div>
     </main>
   );

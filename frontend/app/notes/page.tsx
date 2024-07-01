@@ -1,4 +1,26 @@
+'use client'
+import { TNote } from "@/lib/types"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
 
+
+export default function NoteBook() {
+
+    const { data, isLoading, error } = useQuery({
+        queryKey: ['notes'],
+        queryFn: async () => {
+            return (await axios.get<TNote>("http://localhost:5000/posts")).data
+        }
+    })
+
+    console.log(data)
+    
+    return (
+        <div>
+            <h1></h1>
+        </div>
+    )
+}
 
 
 

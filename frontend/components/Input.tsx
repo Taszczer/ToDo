@@ -9,7 +9,7 @@ interface InputProps {
   error?: boolean;
   disabled?: boolean;
   className?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({
