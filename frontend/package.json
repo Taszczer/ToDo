@@ -16,6 +16,7 @@
     "@fullcalendar/react": "^6.1.14",
     "@fullcalendar/resource-timegrid": "^6.1.14",
     "@headlessui/react": "^2.1.0",
+    "@hocuspocus/provider": "^2.13.2",
     "@hookform/resolvers": "^3.6.0",
     "@tanstack/react-query": "^5.45.1",
     "@tiptap/pm": "^2.4.0",
