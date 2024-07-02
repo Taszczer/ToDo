@@ -1,7 +1,9 @@
 'use client'
+
 import { TNote } from "@/lib/types"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import Link from "next/link"
 
 
 export default function NoteBook() {
@@ -18,10 +20,12 @@ export default function NoteBook() {
         <div>
             <h1>twoje notatki</h1>
             {data?.map((note) => (
-                <div key={note._id}>
-                    <h1>{note.title}</h1>
-                    <p>{note.descriptionText}</p>
-                </div>
+                <Link href={`/notes/${note._id}`}>
+                    <div key={note._id} className="mt-3 ">
+                        <h1>{note.title}</h1>
+                        {/* <p>{note.descriptionText}</p> */}
+                    </div>
+                </Link>
             ))}
         </div>
     )
