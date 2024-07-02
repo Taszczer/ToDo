@@ -46,4 +46,13 @@ router.put("/notes/edit/:id", async (req, res) => {
     }
 })
 
+router.delete("/notes/delete/:id", async (req, res) => {
+    try {
+        const deleteNote = await Note.deleteOne({ _id: req.params.id })
+        res.status(204).json(deleteNote)
+    } catch (err) {
+        res.status(500).send(`Your error is ${err}`)
+    }
+})
+
 module.exports = router

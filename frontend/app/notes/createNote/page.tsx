@@ -6,10 +6,13 @@ import { createNoteSchema, CreateNoteSchema } from "@/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 export default function CreateNote() {
+
+    const router = useRouter()
 
     const { register, handleSubmit, formState:{isSubmitting} } = useForm<CreateNoteSchema>({
         resolver: zodResolver(createNoteSchema)
@@ -22,7 +25,7 @@ export default function CreateNote() {
 
         onSuccess: () => {
             toast.success("Notatka została stworzona")
-            window.location.reload()
+            router.push("/notes")
         },
         onError: (error) => {
             toast.error("Coś poszło nie tak")

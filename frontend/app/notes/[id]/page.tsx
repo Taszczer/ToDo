@@ -1,9 +1,13 @@
 'use client'
 
+import { deleteNote } from "@/lib/api"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 
-export default function NotesDetails({params}:{params:{id:string|number}}) {
+export default function NotesDetails({ params }: { params: { id: string | number } }) {
+    
+    const router = useRouter()
     const { data, error, isLoading } = useQuery({
         queryKey: ['noteId'],
         queryFn: async () => {
@@ -14,6 +18,10 @@ export default function NotesDetails({params}:{params:{id:string|number}}) {
         <div>
             <h1>{data?.title}</h1>
             <p>{data?.descriptionText}fsgs</p>
+            <button onClick={() => {
+                deleteNote(params.id)
+                router.push('/notes')
+             }}>Usuń notatkę</button>
         </div>
     )
 }
