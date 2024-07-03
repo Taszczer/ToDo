@@ -55,19 +55,4 @@ router.delete("/notes/delete/:id", async (req, res) => {
     }
 })
 
-// router.patch("/notes/update/:id", async (req, res) => {
-//     try {
-//         const updatedNote = await Note.updateOne(
-//             { _id: req.params.id },
-//             {
-//                 title: req.params.title,
-//                 descriptionText: req.params.descriptionText
-//             }
-//         )
-//         res.status(200).json(updatedNote)
-//     } catch (err) {
-//         res.send(500).send(`Something went wrong ${err}`)
-//     }
-// })
-
 module.exports = router

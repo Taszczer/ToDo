@@ -4,13 +4,14 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useQuery, useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import { useRouter } from "next/navigation"
 import { useEffect, useCallback } from 'react'
 import { toast } from 'sonner'
+import { deleteNote } from '@/lib/api'
+import { useRouter } from 'next/navigation'
 
 export default function NotesDetails({ params }: { params: { id: string | number } }) {
-    const router = useRouter()
-    const { data, error, isLoading } = useQuery({
+
+    const { data, isLoading } = useQuery({
         queryKey: ['noteId'],
         queryFn: async () => {
             return (await axios.get(`http://localhost:5000/notes/${params.id}`)).data
@@ -22,6 +23,7 @@ export default function NotesDetails({ params }: { params: { id: string | number
         content: '',
     })
 
+    const router = useRouter()
     useEffect(() => {
         if (editor && data?.descriptionText) {
             editor.commands.setContent(data.descriptionText)
@@ -55,14 +57,16 @@ export default function NotesDetails({ params }: { params: { id: string | number
         return <div>Loading...</div>
     }
 
-    if (error) {
-        return <div>Error loading note</div>
-    }
-
     return (
-        <div>
+        <div className=' m-5'>
             <EditorContent editor={editor} />
-            <button onClick={handleSave}>Save</button>
+            <div className='flex gap-7'>
+                <button onClick={handleSave}>Save</button>
+                <button onClick={() => {
+                    deleteNote(params.id)
+                    router.push('/notes')
+                }}>Delate</button>
+            </div>
         </div>
     )
 }
