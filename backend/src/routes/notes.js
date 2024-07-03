@@ -34,13 +34,13 @@ router.get("/notes/:id", async (req, res) => {
 
 router.put("/notes/edit/:id", async (req, res) => {
     try {
-        const updatedNote = await Note.findById(req.body.id)
+        const updatedNote = await Note.findById(req.params.id)
 
-        updatedNote.overwrite({
-            title: req.body.title,
-            descriptionText: req.body.descriptionText
-        }).save()
-        res.status(201).send(updatedNote)
+        updatedNote.title = req.body.title
+        updatedNote.descriptionText = req.body.descriptionText
+        await updatedNote.save()
+
+        res.status(200).send(updatedNote)
     } catch (err) {
         res.status(500).send(`Your error is ${err}`)
     }
@@ -55,19 +55,19 @@ router.delete("/notes/delete/:id", async (req, res) => {
     }
 })
 
-router.patch("/notes/update/:id", async (req, res) => {
-    try {
-        const updatedNote = await Note.updateOne(
-            { _id: req.params.id },
-            {
-                title: req.params.title,
-                descriptionText: req.params.descriptionText
-            }
-        )
-        res.status(200).json(updatedNote)
-    } catch (err) {
-        res.send(500).send(`Something went wrong ${err}`)
-    }
-})
+// router.patch("/notes/update/:id", async (req, res) => {
+//     try {
+//         const updatedNote = await Note.updateOne(
+//             { _id: req.params.id },
+//             {
+//                 title: req.params.title,
+//                 descriptionText: req.params.descriptionText
+//             }
+//         )
+//         res.status(200).json(updatedNote)
+//     } catch (err) {
+//         res.send(500).send(`Something went wrong ${err}`)
+//     }
+// })
 
 module.exports = router
