@@ -27,6 +27,7 @@ export default function NoteBook() {
                     </div>
                 </Link>
             ))}
+            <Link href={'/notes/createNote'} className="mt-2"><p className=" border-blue-600 border-r-4 border-b-4 bg-blue-400 text-white w-[50px] h-[50px] rounded-full font-bold text-xl flex justify-center items-center">+</p></Link>
         </div>
     )
 }
