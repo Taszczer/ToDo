@@ -25,7 +25,7 @@ export default function CreateNote() {
 
         onSuccess: () => {
             toast.success("Notatka została stworzona")
-            router.push("/notes")
+            router.push("/")
         },
         onError: (error) => {
             toast.error("Coś poszło nie tak")

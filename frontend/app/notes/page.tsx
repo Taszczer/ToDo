@@ -15,19 +15,28 @@ export default function NoteBook() {
         }
     })
     
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
+
+    if (error) {
+        return <p>Something went wrong</p>
+    }
 
     return (
-        <div>
-            <h1>twoje notatki</h1>
-            {data?.map((note) => (
-                <Link href={`/notes/${note._id}`}>
-                    <div key={note._id} className="mt-3 ">
-                        <h1>{note.title}</h1>
-                        {/* <p>{note.descriptionText}</p> */}
-                    </div>
-                </Link>
-            ))}
-            <Link href={'/notes/createNote'} className="mt-2"><p className=" border-blue-600 border-r-4 border-b-4 bg-blue-400 text-white w-[50px] h-[50px] rounded-full font-bold text-xl flex justify-center items-center">+</p></Link>
+        <div className=" max-w-[500px]">
+            <div className="mt-3 border-4 rounded-3xl border-blue-600 px-5 py-3 flex flex-col">
+                <h1 className="text-xl font-bold text-blue-400">Your notes</h1>
+                {data?.map((note) => (
+                    <Link href={`/notes/${note._id}`}>
+                        <div key={note._id} className="mt-3 border-2 border-blue-400 p-2 px-4 rounded-2xl">
+                            {/* <img src="" alt="" /> */}
+                            <h1 className="font-bold text-blue-500 capitalize">{note.title}</h1>
+                        </div>
+                    </Link>
+                ))}
+                <Link href={'/notes/createNote'} className="mt-2 flex items-center justify-center"><p className=" border-blue-600 border-r-4 border-b-4 bg-blue-400 text-white w-[50px] h-[50px] rounded-full font-bold text-xl flex justify-center items-center">+</p></Link>
+            </div>
         </div>
     )
 }
