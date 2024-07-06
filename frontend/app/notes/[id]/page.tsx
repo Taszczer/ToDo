@@ -2,6 +2,7 @@
 
 import { useEditor, EditorContent } from '@tiptap/react'
 import Bold from '@tiptap/extension-bold'
+import Code from '@tiptap/extension-code'
 import StarterKit from '@tiptap/starter-kit'
 import { useQuery, useMutation } from "@tanstack/react-query"
 import axios from "axios"
@@ -19,10 +20,16 @@ export default function NotesDetails({ params }: { params: { id: string | number
         }
     })
 
-    let forBold = 2
-
     const editor = useEditor({
-        extensions: [StarterKit, Bold],
+        extensions: [
+            StarterKit,
+            Bold,
+            Code.configure({
+                HTMLAttributes: {
+                    class: 'my-custom-class',
+                },
+            }),
+        ],
         content: '',
     })
 
@@ -61,31 +68,29 @@ export default function NotesDetails({ params }: { params: { id: string | number
     }
 
     return (
-        <div className=' m-5'>
+        <div className='m-5'>
             <div className='flex gap-5'>
                 <button
-                    onClick={() => {
-                        if (forBold % 2 === 0) {
-                            editor?.chain().focus().toggleBold().run()
-                            forBold += 1
-                        } else {
-                            editor?.chain().focus().setBold().run()
-                            forBold += 1
-                        }
-                        
-                    }}
+                    onClick={() => editor?.chain().focus().toggleBold().run()}
                     className={editor?.isActive('bold') ? 'is-active' : ''}
                 >
                     B
                 </button>
+
+                <button
+                    onClick={() => editor?.chain().focus().toggleCode().run()}
+                    className={editor?.isActive('code') ? 'is-active' : ''}
+                >
+                    {editor?.isActive('code') ? 'Unset code' : 'Set code'}
+                </button>
             </div>
-            <EditorContent editor={editor} />
+            <EditorContent className='max-w-96' editor={editor} />
             <div className='flex gap-7'>
                 <button onClick={handleSave}>Save</button>
                 <button onClick={() => {
                     deleteNote(params.id)
                     router.push('/notes')
-                }}>Delate</button>
+                }}>Delete</button>
             </div>
         </div>
     )
