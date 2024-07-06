@@ -1,6 +1,7 @@
 'use client'
 
 import { useEditor, EditorContent } from '@tiptap/react'
+import Bold from '@tiptap/extension-bold'
 import StarterKit from '@tiptap/starter-kit'
 import { useQuery, useMutation } from "@tanstack/react-query"
 import axios from "axios"
@@ -18,8 +19,10 @@ export default function NotesDetails({ params }: { params: { id: string | number
         }
     })
 
+    let forBold = 2
+
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [StarterKit, Bold],
         content: '',
     })
 
@@ -59,6 +62,23 @@ export default function NotesDetails({ params }: { params: { id: string | number
 
     return (
         <div className=' m-5'>
+            <div className='flex gap-5'>
+                <button
+                    onClick={() => {
+                        if (forBold % 2 === 0) {
+                            editor?.chain().focus().toggleBold().run()
+                            forBold += 1
+                        } else {
+                            editor?.chain().focus().setBold().run()
+                            forBold += 1
+                        }
+                        
+                    }}
+                    className={editor?.isActive('bold') ? 'is-active' : ''}
+                >
+                    B
+                </button>
+            </div>
             <EditorContent editor={editor} />
             <div className='flex gap-7'>
                 <button onClick={handleSave}>Save</button>
