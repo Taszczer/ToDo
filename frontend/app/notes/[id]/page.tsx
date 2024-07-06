@@ -3,6 +3,7 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import Bold from '@tiptap/extension-bold'
 import Code from '@tiptap/extension-code'
+import Italic from '@tiptap/extension-italic'
 import StarterKit from '@tiptap/starter-kit'
 import { useQuery, useMutation } from "@tanstack/react-query"
 import axios from "axios"
@@ -24,6 +25,7 @@ export default function NotesDetails({ params }: { params: { id: string | number
         extensions: [
             StarterKit,
             Bold,
+            Italic,
             Code.configure({
                 HTMLAttributes: {
                     class: 'my-custom-class',
@@ -82,6 +84,13 @@ export default function NotesDetails({ params }: { params: { id: string | number
                     className={editor?.isActive('code') ? 'is-active' : ''}
                 >
                     {editor?.isActive('code') ? 'Unset code' : 'Set code'}
+                </button>
+
+                <button
+                    onClick={() => editor?.chain().focus().toggleItalic().run()}
+                    className={editor?.isActive('italic') ? 'is-active' : ''}
+                >
+                    Set italic
                 </button>
             </div>
             <EditorContent className='max-w-96' editor={editor} />
