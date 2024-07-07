@@ -28,10 +28,8 @@ export default function NotesDetails({ params }: { params: { id: string | number
             StarterKit,
             Bold,
             Italic,
-             ListItem, 
-            BulletList.configure({
-                itemTypeName: 'listItem',
-              }),
+            BulletList,
+            ListItem,
             Code.configure({
                 HTMLAttributes: {
                     class: 'my-custom-class',
@@ -105,7 +103,7 @@ export default function NotesDetails({ params }: { params: { id: string | number
                     Toggle bullet list
                 </button>
             </div>
-            <EditorContent className='max-w-96' editor={editor} />
+            <EditorContent className='tiptap-content max-w-96' editor={editor} />
             <div className='flex gap-7'>
                 <button onClick={handleSave}>Save</button>
                 <button onClick={() => {
