@@ -4,6 +4,8 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import Bold from '@tiptap/extension-bold'
 import Code from '@tiptap/extension-code'
 import Italic from '@tiptap/extension-italic'
+import BulletList from '@tiptap/extension-bullet-list'
+import ListItem from '@tiptap/extension-list-item'
 import StarterKit from '@tiptap/starter-kit'
 import { useQuery, useMutation } from "@tanstack/react-query"
 import axios from "axios"
@@ -26,6 +28,10 @@ export default function NotesDetails({ params }: { params: { id: string | number
             StarterKit,
             Bold,
             Italic,
+             ListItem, 
+            BulletList.configure({
+                itemTypeName: 'listItem',
+              }),
             Code.configure({
                 HTMLAttributes: {
                     class: 'my-custom-class',
@@ -91,6 +97,12 @@ export default function NotesDetails({ params }: { params: { id: string | number
                     className={editor?.isActive('italic') ? 'is-active' : ''}
                 >
                     Set italic
+                </button>
+                <button
+                    onClick={() => editor?.chain().focus().toggleBulletList().run()}
+                    className={editor?.isActive('bulletList') ? 'is-active' : ''}
+                >
+                    Toggle bullet list
                 </button>
             </div>
             <EditorContent className='max-w-96' editor={editor} />
