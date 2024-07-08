@@ -7,6 +7,7 @@ import Italic from '@tiptap/extension-italic'
 import BulletList from '@tiptap/extension-bullet-list'
 import ListItem from '@tiptap/extension-list-item'
 import Underline from '@tiptap/extension-underline'
+import Strike from '@tiptap/extension-strike'
 import StarterKit from '@tiptap/starter-kit'
 import { useQuery, useMutation } from "@tanstack/react-query"
 import axios from "axios"
@@ -31,6 +32,7 @@ export default function NotesDetails({ params }: { params: { id: string | number
             Italic,
             BulletList,
             Underline,
+            Strike,
             ListItem,
             Code.configure({
                 HTMLAttributes: {
@@ -109,6 +111,12 @@ export default function NotesDetails({ params }: { params: { id: string | number
                     className={editor?.isActive('code') ? 'is-active' : ''}
                 >
                     Set underline
+                </button>
+                <button
+                    onClick={() => editor?.chain().focus().toggleStrike().run()}
+                    disabled={editor?.isActive('strike')}
+                >
+                    Set strike
                 </button>
             </div>
             <EditorContent className='tiptap-content max-w-96' editor={editor} />
