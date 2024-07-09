@@ -1,4 +1,4 @@
-import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogTitle } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Transition } from '@headlessui/react'
 

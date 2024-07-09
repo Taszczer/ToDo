@@ -15,6 +15,7 @@ import { useEffect, useCallback } from 'react'
 import { toast } from 'sonner'
 import { deleteNote } from '@/lib/api'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function NotesDetails({ params }: { params: { id: string | number } }) {
 

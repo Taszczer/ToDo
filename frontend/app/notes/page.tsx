@@ -1,12 +1,16 @@
 'use client'
 
+import CreateNoteDialog from "@/components/createNoteDialog"
 import { TNote } from "@/lib/types"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Link from "next/link"
+import { useState } from "react"
 
 
 export default function NoteBook() {
+
+    const [isOpen, setIsOpen] = useState(false)
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['notes'],
@@ -37,7 +41,8 @@ export default function NoteBook() {
                         </Link>
                     ))}
                 </div>
-                <Link href={'/notes/createNote'} className="mt-2 flex items-center justify-center"><p className=" border-blue-600 border-r-4 border-b-4 bg-blue-400 text-white w-[50px] h-[50px] rounded-full font-bold text-xl flex justify-center items-center">+</p></Link>
+                <button onClick={() => { setIsOpen(true) }} className="mt-2 flex items-center justify-center"><p className=" border-blue-600 border-r-4 border-b-4 bg-blue-400 text-white w-[50px] h-[50px] rounded-full font-bold text-xl flex justify-center items-center">+</p></button>
+                <CreateNoteDialog isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
         </div>
     )
