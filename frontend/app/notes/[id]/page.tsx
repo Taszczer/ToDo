@@ -40,6 +40,11 @@ export default function NotesDetails({ params }: { params: { id: string | number
                 },
             }),
         ],
+        editorProps: {
+            attributes: {
+                class:"max-w-[625px] max-h-[800px] overflow-y-auto min-w-[625px] min-h-[200px] focus:outline-none border-2 border-b-4 border-r-4 border-r-blue-400 border-b-blue-400 border-blue-200 rounded-xl py-2 px-5"
+            }
+        },
         content: '',
     })
 
@@ -78,8 +83,8 @@ export default function NotesDetails({ params }: { params: { id: string | number
     }
 
     return (
-        <div className='m-5'>
-            <div className='flex gap-5'>
+        <div className='m-5 flex flex-col items-center justify-center mt-[200px]'>
+            <div className='flex gap-5 px-5 py-2 border-2 border-r-4 border-b-4 mb-4 rounded-xl border-blue-200 border-r-blue-400 border-b-blue-400'>
                 <button
                     onClick={() => editor?.chain().focus().toggleBold().run()}
                     className={editor?.isActive('bold') ? 'is-active' : ''}
@@ -119,13 +124,21 @@ export default function NotesDetails({ params }: { params: { id: string | number
                     Set strike
                 </button>
             </div>
-            <EditorContent className='tiptap-content max-w-96' editor={editor} />
-            <div className='flex gap-7'>
-                <button onClick={handleSave}>Save</button>
-                <button onClick={() => {
-                    deleteNote(params.id)
-                    router.push('/notes')
-                }}>Delete</button>
+            <EditorContent editor={editor} />
+            <div className='flex gap-6 items-center justify-end w-[625px] mr-10 mt-2'>
+                <button
+                    onClick={handleSave}
+                    className='bg-blue-400 border-r-2 border-b-2 border-blue-600 w-[100px] text-white  py-2 rounded-full'
+                >
+                    Save
+                </button>
+                <button
+                    onClick={() => {
+                        deleteNote(params.id)
+                        router.push('/notes')
+                    }}
+                    className='bg-blue-400 border-r-2 border-b-2 w-[100px] border-blue-600 text-white  py-2 rounded-full'
+                >Delete</button>
             </div>
         </div>
     )

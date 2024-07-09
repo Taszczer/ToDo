@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 .fc .fc-scrollgrid-liquid {
     max-height: 85%;
     width: 100%;
