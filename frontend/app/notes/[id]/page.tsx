@@ -15,9 +15,11 @@ import { useEffect, useCallback } from 'react'
 import { toast } from 'sonner'
 import { deleteNote } from '@/lib/api'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function NotesDetails({ params }: { params: { id: string | number } }) {
+
+    const router = useRouter()
 
     const { data, isLoading } = useQuery({
         queryKey: ['noteId'],
@@ -49,7 +51,6 @@ export default function NotesDetails({ params }: { params: { id: string | number
         content: '',
     })
 
-    const router = useRouter()
     useEffect(() => {
         if (editor && data?.descriptionText) {
             editor.commands.setContent(data.descriptionText)
@@ -85,6 +86,7 @@ export default function NotesDetails({ params }: { params: { id: string | number
 
     return (
         <div className='m-5 flex flex-col items-center justify-center mt-[200px]'>
+            <button className='flex justify-end items-center w-[625px] cursor-pointer mb-5 text-blue-600' onClick={() => { router.push('/') }}><IoIosCloseCircleOutline size={50}/></button>
             <div className='flex gap-5 px-5 py-2 border-2 border-r-4 border-b-4 mb-4 rounded-xl border-blue-200 border-r-blue-400 border-b-blue-400'>
                 <button
                     onClick={() => editor?.chain().focus().toggleBold().run()}
