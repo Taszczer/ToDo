@@ -27,7 +27,7 @@ export default function ResourceCalendar() {
     const startTime = new Date(post.start_time).getTime();
     const endTime = new Date(post.end_time).getTime();
     const durationInHours = (endTime - startTime) / (1000 * 60 * 60);
-
+    
     return {
       id: post._id.toString(),
       resourceId: 'a',
