@@ -16,7 +16,11 @@ export default function Home() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <img src="/loader.gif" alt="afdadf" width={200} height={200} />
+      </div>
+    );
   }
 
   return (
