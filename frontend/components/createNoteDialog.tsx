@@ -63,7 +63,7 @@ export default function CreateNoteDialog({ isOpen, setIsOpen }: any) {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
                   <div className="flex gap-4 mt-5">
-                    <Input className='bg-blue-500 border-b-blue-700 border-r-blue-700' placeholder='title' type="text" {...register('title')} />
+                    <input className='w-[300px] rounded-xl border-b-4 active:border-0 placeholder:text-white placeholder:font-bold border-r-4 px-4 py-1 bg-blue-500 border-b-blue-700 border-r-blue-700' placeholder='title' type="text" {...register('title')} />
                   </div>
                     <Button name='Stwórz zadanie' className='bg-blue-500 border-b-blue-700 border-r-blue-700 w-[250px] mt-5' type="submit" disabled={isSubmitting}/>
                 </form>

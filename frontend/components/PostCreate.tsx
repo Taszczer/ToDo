@@ -47,7 +47,7 @@ export default function CreatePost() {
                   <Input className=' mt-2 text-white font-bold' placeholder='autor' type="datetime-local" {...register("start_time")} />
                   <Input className=' mt-2 text-white font-bold' placeholder='autor' type="datetime-local" {...register("end_time")} />
               </div>
-              <Button name='Stwórz zadanie' className=' w-[250px] mt-5' type="submit" disabled={isSubmitting}/>
+              <Button name='Stwórz zadanie' className='border-r-orange-secondary border-b-orange-secondary bg-orange-primary w-[250px] mt-5' type="submit" disabled={isSubmitting}/>
             </div>
         </form>
     </div>
