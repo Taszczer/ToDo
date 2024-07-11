@@ -24,7 +24,7 @@ db2.on('error', (err) => {
 });
 
 db3.on('connected', () => {
-    console.log('Connected to notebook');
+    console.log('Connected to user');
 });
 
 db3.on('error', (err) => {
