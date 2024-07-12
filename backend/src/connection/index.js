@@ -28,7 +28,7 @@ db3.on('connected', () => {
 });
 
 db3.on('error', (err) => {
-    console.error(`Error connecting to blog: ${err.message}`)
+    console.error(`Error connecting to user: ${err.message}`)
 })
 
 module.exports = { db1, db2, db3 }

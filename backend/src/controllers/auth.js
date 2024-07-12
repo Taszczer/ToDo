@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const bcrypt = require('bcrypt');
 
 async function Register(req, res) {
     const { firstName, lastName, email, password } = req.body;
@@ -26,7 +27,7 @@ async function Register(req, res) {
             status: "success",
             data: [user_data],
             message:
-                "Thank you for registering with us. Your account has been successfully created.",
+                "Your account has been successfully created.",
         });
 
     } catch (err) {
@@ -40,4 +41,44 @@ async function Register(req, res) {
     res.end();
 }
 
-module.exports = { Register };
+async function Login(req, res) {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email }).select("+password");
+        if (!user) {
+            return res.status(401).json({
+                status: "failed",
+                data: [],
+                message: "Invalid email or password, please try again",
+            });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                status: "failed",
+                data: [],
+                message: "Invalid email or password, please try again",
+            });
+        }
+
+        const { password: _, ...user_data } = user._doc;
+
+        res.status(200).json({
+            status: "success",
+            data: [user_data],
+            message: "You have successfully logged in.",
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: "Internal Server Error",
+        });
+    }
+}
+
+
+module.exports = { Register, Login };
