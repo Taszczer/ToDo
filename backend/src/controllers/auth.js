@@ -43,6 +43,7 @@ async function Register(req, res) {
 
 async function Login(req, res) {
     const { email, password } = req.body;
+
     try {
         const user = await User.findOne({ email }).select("+password");
         if (!user) {
@@ -62,16 +63,27 @@ async function Login(req, res) {
             });
         }
 
-        const { password: _, ...user_data } = user._doc;
+        const token = user.generateAccessJWT();
 
-        res.status(200).json({
+        const options = {
+            maxAge: 20 * 60 * 1000,
+            httpOnly: true,
+            secure: true,
+            sameSite: "None"
+        };
+
+        res.cookie("SessionID", token, options);
+
+        const { password: pwd, ...user_data } = user._doc;
+
+        return res.status(200).json({
             status: "success",
             data: [user_data],
             message: "You have successfully logged in.",
         });
 
     } catch (err) {
-        res.status(500).json({
+        return res.status(500).json({
             status: "error",
             code: 500,
             data: [],

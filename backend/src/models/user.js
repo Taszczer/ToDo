@@ -1,6 +1,10 @@
 const mongoose = require("mongoose")
 const bcrypt = require('bcrypt');
 const { db3 } = require('../connection/index')
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
+
+const { JWT_SECRET } = process.env;
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -50,6 +54,13 @@ userSchema.pre("save", function (next) {
         })
     })
 })
+
+userSchema.methods.generateAccessJWT = function () {
+    let payload = {
+        id: this_id
+    }
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: "20m" })
+}
 
 const User = db3.model('User', userSchema)
 
