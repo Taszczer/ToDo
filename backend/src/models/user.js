@@ -57,7 +57,7 @@ userSchema.pre("save", function (next) {
 
 userSchema.methods.generateAccessJWT = function () {
     let payload = {
-        id: this_id
+        id: this._id
     }
     return jwt.sign(payload, JWT_SECRET, { expiresIn: "20m" })
 }

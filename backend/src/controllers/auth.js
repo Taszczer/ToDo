@@ -42,55 +42,54 @@ async function Register(req, res) {
 }
 
 async function Login(req, res) {
-    const { email, password } = req.body;
 
+    const { email } = req.body;
     try {
+
         const user = await User.findOne({ email }).select("+password");
-        if (!user) {
+        if (!user)
             return res.status(401).json({
                 status: "failed",
                 data: [],
-                message: "Invalid email or password, please try again",
+                message:
+                    "Invalid email or password. Please try again with the correct credentials.",
             });
-        }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
+        const isPasswordValid = bcrypt.compare(
+            `${req.body.password}`,
+            user.password
+        );
+
+        if (!isPasswordValid)
             return res.status(401).json({
                 status: "failed",
                 data: [],
-                message: "Invalid email or password, please try again",
+                message:
+                    "Invalid email or password. Please try again with the correct credentials.",
             });
-        }
 
-        const token = user.generateAccessJWT();
-
-        const options = {
+        const { password, ...user_data } = user._doc;
+        let options = {
             maxAge: 20 * 60 * 1000,
             httpOnly: true,
             secure: true,
-            sameSite: "None"
+            sameSite: "None",
         };
-
+        const token = user.generateAccessJWT();
         res.cookie("SessionID", token, options);
-
-        const { password: pwd, ...user_data } = user._doc;
-
-        return res.status(200).json({
+        res.status(200).json({
             status: "success",
             data: [user_data],
             message: "You have successfully logged in.",
         });
-
     } catch (err) {
-        return res.status(500).json({
+        res.status(500).json({
             status: "error",
             code: 500,
             data: [],
             message: "Internal Server Error",
         });
     }
+    res.end();
 }
-
-
 module.exports = { Register, Login };
