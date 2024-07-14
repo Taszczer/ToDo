@@ -26,6 +26,13 @@ export const createNoteSchema = z.object({
     title: z.string().min(2, { message: "Zbyt krótki tytuł!" }).max(35, { message: "Zbyt długi tytuł, musisz go skrócić" }),
 })
 
+export const createSigninSchema = z.object({
+    firstName: z.string().min(1, {message: "This field has to be filled."}).max(30, {message: "FirstName must be shorter than 30 characters."}),
+    lastName:z.string().min(1, {message: "This field has to be filled."}).max(30, {message: "LastName must be shorter than 30 characters."}),
+    email:z.string().min(1, {message: "This field has to be filled."}).email("This is not a valid email."),
+    password:z.string().min(4, {message: "Password must be longer than 4 characters"})
+})
+
 export const createLoginSchema = z.object({
     email:z.string().min(1, {message: "This field has to be filled."}).email("This is not a valid email."),
     password:z.string().min(4, {message: "Password must be longer than 4 characters"})
@@ -33,4 +40,5 @@ export const createLoginSchema = z.object({
 
 export type CreateSchema = z.infer<typeof createSchema>
 export type CreateNoteSchema = z.infer<typeof createNoteSchema>
+export type CreateSigninSchema = z.infer<typeof createSigninSchema>
 export type CreateLoginSchema = z.infer<typeof createLoginSchema>
