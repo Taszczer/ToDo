@@ -1,20 +1,36 @@
+'use client'
+
 import Input from "@/components/Input"
 import { createLoginSchema, CreateLoginSchema } from "@/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import React from "react"
+import { useRouter } from "next/navigation"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
 export default function LogIn() {
+
+     const [first, setFirst] = useState(false)
 
     const { register, handleSubmit, formState: { isSubmitting } } = useForm<CreateLoginSchema>({
         resolver:zodResolver(createLoginSchema)
     })
 
+    const router = useRouter()
+
     const mutation = useMutation({
         mutationFn: async (data:CreateLoginSchema) => {
             return axios.post('http://localhost:5000/login', data)
+        },
+        onSuccess: () => {
+            toast.success("You have successfully logged in.")
+            console.log("200")
+            router.push("/")
+        },
+        onError: () => {
+            setFirst(true)
         }
     })
 
@@ -22,7 +38,8 @@ export default function LogIn() {
         mutation.mutate({...data})
     }
   return (
-    <>
+      <>
+          <h1>{first ? "Invalid email or password. Please try again with the correct credentials." : "" }</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
               <Input type="email" placeholder='email' {...register("email")} />
               <Input type="password" placeholder='password' {...register("password")} />

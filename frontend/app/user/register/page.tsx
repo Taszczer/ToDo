@@ -1,3 +1,5 @@
+'use client'
+
 import Input from '@/components/Input'
 import { CreateSigninSchema, createSigninSchema } from '@/lib/types'
 import { zodResolver } from '@hookform/resolvers/zod'
