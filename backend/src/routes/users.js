@@ -20,4 +20,13 @@ router.post("/login",
     Login
 )
 
+router.get("find/:email", async (req, res) => {
+    try {
+        const dataBaseEmail = await User.findOne(req.params.email)
+        res.status(200).json(dataBaseEmail)
+    } catch (err) {
+        res.status(500).send(`Your error is: ${err}`)
+    }
+})
+
 module.exports = router
