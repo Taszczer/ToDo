@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Calendar from "@/components/Calendar";
 import CreatePost from "@/components/PostCreate";
 import NoteBook from "./notes/page";
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ export default function Home() {
   return (
     <main>
       <div className="max-w-[70%]">
+        <Navbar/>
         <div className="mt-12 ml-10">
           <Calendar />
         </div>

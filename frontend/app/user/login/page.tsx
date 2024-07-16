@@ -12,7 +12,7 @@ import { toast } from "sonner"
 
 export default function LogIn() {
 
-     const [first, setFirst] = useState(false)
+    const [first, setFirst] = useState(false)
 
     const { register, handleSubmit, formState: { isSubmitting } } = useForm<CreateLoginSchema>({
         resolver:zodResolver(createLoginSchema)
@@ -26,7 +26,6 @@ export default function LogIn() {
         },
         onSuccess: () => {
             toast.success("You have successfully logged in.")
-            console.log("200")
             router.push("/")
         },
         onError: () => {
