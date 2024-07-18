@@ -2,6 +2,7 @@ const express = require("express");
 const { Register } = require("../controllers/auth.js");
 const { Login } = require("../controllers/auth.js");
 const { check } = require("express-validator");
+const authenticateToken = require("../middlewares/authMiddleware.js");
 const router = express.Router();
 
 router.post("/register",
@@ -27,6 +28,14 @@ router.get("find/:email", async (req, res) => {
     } catch (err) {
         res.status(500).send(`Your error is: ${err}`)
     }
+})
+
+router.get("/whoAmI", authenticateToken, (req, res) => {
+    res.status(200).json({
+        status: "success",
+        data: req.user,
+        message: "User information retrieved successfully."
+    })
 })
 
 module.exports = router
