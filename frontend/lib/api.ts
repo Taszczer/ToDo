@@ -18,3 +18,7 @@ export async function whoAmI(): Promise<User | null> {
         return null
     }
 }
+
+export async function resumeSession(): Promise<User | null> {
+    return await whoAmI();
+}
