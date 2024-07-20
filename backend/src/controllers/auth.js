@@ -55,7 +55,7 @@ async function Login(req, res) {
                     "Invalid email or password. Please try again with the correct credentials.",
             });
 
-        const isPasswordValid = bcrypt.compare(
+        const isPasswordValid = await bcrypt.compare(
             `${req.body.password}`,
             user.password
         );

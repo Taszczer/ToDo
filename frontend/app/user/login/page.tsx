@@ -1,6 +1,7 @@
 'use client'
 
 import Input from "@/components/Input"
+import { whoAmI } from "@/lib/api"
 import { createLoginSchema, CreateLoginSchema } from "@/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
