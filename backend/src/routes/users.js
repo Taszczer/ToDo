@@ -30,7 +30,7 @@ router.get("find/:email", async (req, res) => {
     }
 })
 
-router.get("/whoAmI", authenticateToken, (req, res) => {
+router.get("/whoami", authenticateToken, (req, res) => {
     res.status(200).json({
         status: "success",
         data: req.user,

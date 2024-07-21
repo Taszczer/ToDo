@@ -16,7 +16,7 @@ export default function SignIn() {
 
     const mutation = useMutation({
         mutationFn: async (data:CreateSigninSchema) => {
-            return axios.post("http://localhost:5000/register", data, {
+            return await axios.post("http://localhost:5000/register", data, {
                 headers: { "Content-Type": "multipart/form-data" },
               })
         }

@@ -1,17 +1,21 @@
 "use client"
 
 import { resumeSession } from "@/lib/api";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export function useUser() {
-    const { data } = useSuspenseQuery({
+    const { data, error, isLoading } = useQuery({
         queryKey: ["user"],
         queryFn: resumeSession,
-        staleTime: Infinity
-    })
-    return data
-}
+        staleTime: Infinity,
+    });
 
+    if (error) {
+        console.error("Error in useUser hook:", error); // Detailed error logging
+    }
+
+    return { user: data, isLoading };
+}
 
 // export async function signUp(body: SignUpSchema): Promise<User | null> {
 //     const user = await apiSignUp(body);
@@ -36,20 +40,21 @@ export function useUser() {
 //     return user;
 // }
   
-export default function AuthProvider({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) {
-    const { isPending } = useQuery({
+export default function AuthProvider({ children }: { children: React.ReactNode }) {
+  const { data: user, isLoading, error } = useQuery({
       queryKey: ["user"],
       queryFn: resumeSession,
       staleTime: Infinity,
-    });
-  
-    if (isPending) {
-      return <p>Loading</p>
-    }
-  
-    return children;
+  });
+
+  if (isLoading) {
+      return <p>Loading...</p>;
   }
+
+  if (error) {
+      console.error("Error in AuthProvider:", error); // Detailed error logging
+      return <p>Error loading user data</p>;
+  }
+
+  return children;
+}

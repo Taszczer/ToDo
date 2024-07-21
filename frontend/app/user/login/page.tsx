@@ -1,7 +1,7 @@
 'use client'
 
 import Input from "@/components/Input"
-import { whoAmI } from "@/lib/api"
+import { login, whoAmI } from "@/lib/api"
 import { createLoginSchema, CreateLoginSchema } from "@/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
@@ -22,12 +22,11 @@ export default function LogIn() {
     const router = useRouter()
 
     const mutation = useMutation({
-        mutationFn: async (data:CreateLoginSchema) => {
-            return axios.post('http://localhost:5000/login', data)
-        },
+        mutationFn: login,
         onSuccess: () => {
             toast.success("You have successfully logged in.")
             router.push("/")
+            whoAmI()
         },
         onError: () => {
             setFirst(true)
