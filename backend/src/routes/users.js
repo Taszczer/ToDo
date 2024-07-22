@@ -1,41 +1,135 @@
+const bcrypt = require('bcrypt');
 const express = require("express");
-const { Register } = require("../controllers/auth.js");
-const { Login } = require("../controllers/auth.js");
-const { check } = require("express-validator");
-const authenticateToken = require("../middlewares/authMiddleware.js");
+const User = require('../models/user');
+// const { Register, Login } = require("../controllers/auth.js");
+// const { check } = require("express-validator");
+// const authenticateToken = require("../middlewares/authMiddleware.js");
 const router = express.Router();
 
-router.post("/register",
-    check("firstName").not().isEmpty().trim().escape(),
-    check("lastName").not().isEmpty().trim().escape(),
-    check("email").isEmail().normalizeEmail(),
-    check("password").notEmpty().isLength({ min: 8 }),
-
-    Register
-)
-
-router.post("/login",
-    check("email").isEmail().normalizeEmail(),
-    check("password").isEmpty(),
-
-    Login
-)
-
-router.get("find/:email", async (req, res) => {
+router.post("/register", async (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
     try {
-        const dataBaseEmail = await User.findOne(req.params.email)
-        res.status(200).json(dataBaseEmail)
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                status: "failed",
+                data: [],
+                message: "You already have an account",
+            });
+        }
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            password,
+        });
+
+        const savedUser = await newUser.save();
+        const { ...user_data } = savedUser._doc;
+
+        res.status(200).json({
+            status: "success",
+            data: [user_data],
+            message: "Your account has been successfully created.",
+        });
+
     } catch (err) {
-        res.status(500).send(`Your error is: ${err}`)
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: "Internal Server Error",
+        });
     }
-})
+});
 
-router.get("/whoami", authenticateToken, (req, res) => {
-    res.status(200).json({
-        status: "success",
-        data: req.user,
-        message: "User information retrieved successfully."
-    })
-})
 
-module.exports = router
+router.post("/register", async (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
+    try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                status: "failed",
+                data: [],
+                message: "You already have an account",
+            });
+        }
+
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            password,
+        });
+
+        const savedUser = await newUser.save();
+        const { password: pwd, ...user_data } = savedUser._doc;
+
+        res.status(200).json({
+            status: "success",
+            data: [user_data],
+            message: "Your account has been successfully created.",
+        });
+
+    } catch (err) {
+        console.error("Error during registration:", err);
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: "Internal Server Error",
+        });
+    }
+});
+
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email }).select('+password');
+        const { ...user_data } = user._doc
+
+        if (!user) {
+            return res.status(400).json({
+                status: "failed",
+                data: [],
+                message: "User doesn't exist",
+            });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({
+                status: "failed",
+                data: [],
+                message: "Password doesn't match",
+            });
+        }
+
+        res.status(200).json({
+            status: "success",
+            data: [user_data],
+            message: "Login successful",
+        });
+
+    } catch (error) {
+        console.error("Error during login:", error);
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: "Internal Server Error",
+        });
+    }
+});
+
+
+// router.get("/whoami", authenticateToken, (req, res) => {
+//     res.status(200).json({
+//         status: "success",
+//         data: req.user,
+//         message: "User information retrieved successfully."
+//     });
+// });
+
+module.exports = router;
