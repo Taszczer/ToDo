@@ -4,6 +4,10 @@ const User = require('../models/user');
 // const { Register, Login } = require("../controllers/auth.js");
 // const { check } = require("express-validator");
 // const authenticateToken = require("../middlewares/authMiddleware.js");
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const { JWT_SECRET } = process.env;
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -105,6 +109,9 @@ router.post("/login", async (req, res) => {
                 message: "Password doesn't match",
             });
         }
+
+        const accessToken = jwt.sign(user, JWT_SECRET)
+        res.json({ accessToken })
 
         res.status(200).json({
             status: "success",
