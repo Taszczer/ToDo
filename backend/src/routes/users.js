@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const bcrypt = require('bcrypt');
 const express = require("express");
 const User = require('../models/user');
@@ -5,9 +7,8 @@ const User = require('../models/user');
 // const { check } = require("express-validator");
 // const authenticateToken = require("../middlewares/authMiddleware.js");
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -91,7 +92,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email }).select('+password');
-        const { ...user_data } = user._doc
+        const { ...user_data } = user?._doc
 
         if (!user) {
             return res.status(400).json({
@@ -110,11 +111,12 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        const accessToken = jwt.sign(user, JWT_SECRET)
-        res.json({ accessToken })
+        const accessToken = jwt.sign(user_data, JWT_SECRET, { expiresIn: '1h' })
+        const refreshToken = jwt.sign(user_data, REFRESH_TOKEN_SECRET)
 
         res.status(200).json({
             status: "success",
+            accessToken: accessToken,
             data: [user_data],
             message: "Login successful",
         });
