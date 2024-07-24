@@ -5,7 +5,7 @@ const express = require("express");
 const User = require('../models/user');
 // const { Register, Login } = require("../controllers/auth.js");
 // const { check } = require("express-validator");
-// const authenticateToken = require("../middlewares/authMiddleware.js");
+const authenticateToken = require("../middlewares/authMiddleware.js");
 const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET, REFRESH_TOKEN_SECRET } = process.env;
@@ -149,12 +149,12 @@ router.post("/refresh", (req, res) => {
 })
 
 
-// router.get("/whoami", authenticateToken, (req, res) => {
-//     res.status(200).json({
-//         status: "success",
-//         data: req.user,
-//         message: "User information retrieved successfully."
-//     });
-// });
+router.get("/whoami", authenticateToken, (req, res) => {
+    res.status(200).json({
+        status: "success",
+        data: req.user,
+        message: "User information retrieved successfully."
+    });
+});
 
 module.exports = router;
