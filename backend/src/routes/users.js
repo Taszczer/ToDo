@@ -114,7 +114,7 @@ router.post("/login", async (req, res) => {
         const accessToken = jwt.sign(user_data, JWT_SECRET, { expiresIn: '1h' })
         const refreshToken = jwt.sign(user_data, REFRESH_TOKEN_SECRET, { expiresIn: '1d' })
 
-
+        res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'strict' })
         res.status(200).json({
             status: "success",
             accessToken: accessToken,
@@ -139,7 +139,7 @@ router.post("/refresh", (req, res) => {
     if (!refreshToken) return res.status(401).send('Access Denied. No refresh token provided.')
 
     try {
-        const decoded = jwt.verify(refreshToken, JWT_SECRET)
+        const decoded = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET)
         const accessToken = jwt.sign(decoded.user, JWT_SECRET, { expiresIn: '1h' })
 
         res.status(200).header('Authorization', accessToken).send(decoded.user)

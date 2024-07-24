@@ -30,11 +30,6 @@ const userSchema = new mongoose.Schema({
         select: false,
         max: 30,
     },
-    // role: {
-    //     type: String,
-    //     required: true,
-    //     default: "0x01",
-    // }
 },
     { timestamps: true }
 )
@@ -54,13 +49,6 @@ userSchema.pre("save", function (next) {
         })
     })
 })
-
-// userSchema.methods.generateAccessJWT = function () {
-//     let payload = {
-//         id: this._id
-//     }
-//     return jwt.sign(payload, JWT_SECRET, { expiresIn: "20m" })
-// }
 
 const User = db3.model('User', userSchema)
 
