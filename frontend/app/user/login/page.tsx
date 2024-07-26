@@ -26,7 +26,7 @@ export default function LogIn() {
         onSuccess: () => {
             toast.success("You have successfully logged in.")
             router.push("/")
-            whoAmI()
+            // whoAmI()
         },
         onError: () => {
             setFirst(true)

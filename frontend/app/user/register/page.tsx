@@ -5,7 +5,6 @@ import { singIn } from '@/lib/api'
 import { CreateSigninSchema, createSigninSchema } from '@/lib/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 

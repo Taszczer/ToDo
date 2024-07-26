@@ -16,26 +16,23 @@ export async function deleteNote(id: any) {
 }
 
 export async function login(body: CreateLoginSchema): Promise<User | null> {
-    await axios.post("http://localhost:5000/login", body, { withCredentials: true });
+    await axios.post("http://localhost:5000/login", body);
     return await whoAmI();
 }
 
 export async function singIn(body:CreateSigninSchema): Promise<User | null> {
-    return await axios.post("http://localhost:5000/register", body, {
-        // withCredentials:true,
-        headers: { "Content-Type": "multipart/form-data" },
-    })
+    return await axios.post("http://localhost:5000/register", body)
 }
 
 export async function whoAmI(): Promise<User | null> {
     try {
-      return (await axios.get<User>("http://localhost:5000/whoami", { withCredentials: true })).data;
+      return (await axios.get<User>("http://localhost:5000/whoami")).data;
     } catch (error) {
       console.log(error)
       return null
     }
 }
   
-export async function resumeSession(): Promise<User | null> {
-    return await whoAmI();
-}
+// export async function resumeSession(): Promise<User | null> {
+//     return await whoAmI();
+// }
