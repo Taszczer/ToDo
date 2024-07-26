@@ -1,7 +1,7 @@
 'use client'
 
 import Input from '@/components/Input'
-import { singIn } from '@/lib/api'
+import { signIn } from '@/lib/api'
 import { CreateSigninSchema, createSigninSchema } from '@/lib/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
@@ -15,7 +15,7 @@ export default function SignIn() {
     })
 
     const mutation = useMutation({
-        mutationFn: singIn
+        mutationFn: signIn
     })
 
     const onSubmit = (data:CreateSigninSchema) => {

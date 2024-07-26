@@ -149,11 +149,11 @@ router.post("/refresh", (req, res) => {
 })
 
 
-router.get("/whoami", authenticateToken, (req, res) => {
+router.get('/whoami', authenticateToken, (req, res) => {
     res.status(200).json({
-        status: "success",
-        data: req.decoded.user,
-        message: "User information retrieved successfully."
+        status: 'success',
+        data: req.user,
+        message: 'User information retrieved successfully.',
     });
 });
 
