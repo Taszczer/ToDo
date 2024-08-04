@@ -53,7 +53,8 @@ export const signIn= async (body:CreateSigninSchema): Promise<User | null> => {
       await axios.post('http://localhost:5000/login', body);
       return await whoAmI()
     } catch (error:any) {
-      throw error.response.data;
+      console.log(error);
+      return null
     }
   };
   

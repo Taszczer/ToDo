@@ -29,7 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
       <input
         ref={ref}
         type={type}
-        id={name}
+        // id={name}
         value={value}
         name={name}
         placeholder={placeholder}

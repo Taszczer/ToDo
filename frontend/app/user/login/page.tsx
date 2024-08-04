@@ -5,7 +5,8 @@ import { login, whoAmI } from "@/lib/api"
 import { createLoginSchema, CreateLoginSchema } from "@/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
-import axios from "axios"
+// import axios from "axios"
+// import { error } from "console"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -26,9 +27,9 @@ export default function LogIn() {
         onSuccess: () => {
             toast.success("You have successfully logged in.")
             router.push("/")
-            // whoAmI()
         },
-        onError: () => {
+        onError: (error) => {
+            console.log(error)
             setFirst(true)
         }
     })

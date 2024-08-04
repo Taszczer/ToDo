@@ -3,8 +3,11 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET, REFRESH_TOKEN_SECRET } = process.env;
 
 const authenticateToken = async (req, res, next) => {
+    console.log('Headers:', req.headers)
     const accessToken = req.headers['authorization'];
+    console.log('Authorization Header:', accessToken);
     const refreshToken = req.cookies['refreshToken'];
+    console.log(refreshToken)
 
     if (!accessToken && !refreshToken) {
         return res.status(401).send('Access Denied. No token provided.');
