@@ -26,6 +26,7 @@ export default function LogIn() {
         mutationFn: login,
         onSuccess: () => {
             toast.success("You have successfully logged in.")
+            console.log('all good')
             router.push("/")
         },
         onError: (error) => {

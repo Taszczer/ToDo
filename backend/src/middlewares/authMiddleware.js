@@ -7,12 +7,11 @@ const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
     try {
-        const authheader = req.headers['cookie']
+        const token = req.header('Authorization').split(' ')[1]
 
-        if (!authheader) return res.sendStatus(401)
-        const cookie = authheader.split('=')[1]
+        if (!token) return res.status(401).json({ error: 'Access denied, token missing' });
 
-        jwt.verify(cookie, JWT_SECRET, async (err, decoded) => {
+        jwt.verify(token, JWT_SECRET, async (err, decoded) => {
             if (err) return res.status(401).json({ message: "This session has expired. Please login" })
 
             const { id } = decoded
