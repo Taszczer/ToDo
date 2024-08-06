@@ -1,39 +1,34 @@
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const { JWT_SECRET, REFRESH_TOKEN_SECRET } = process.env;
+const User = require('../models/user');
 
-const authenticateToken = async (req, res, next) => {
-    console.log('Headers:', req.headers)
-    const accessToken = req.headers['authorization'];
-    console.log('Authorization Header:', accessToken);
-    const refreshToken = req.cookies['refreshToken'];
-    console.log(refreshToken)
+const jwt = require('jsonwebtoken');
 
-    if (!accessToken && !refreshToken) {
-        return res.status(401).send('Access Denied. No token provided.');
-    }
-
+function verifyToken(req, res, next) {
     try {
-        const decoded = jwt.verify(accessToken, JWT_SECRET);
-        req.user = decoded;
-        next();
+        const authheader = req.headers['cookie']
+
+        if (!authheader) return res.sendStatus(401)
+        const cookie = authheader.split('=')[1]
+
+        jwt.verify(cookie, JWT_SECRET, async (err, decoded) => {
+            if (err) return res.status(401).json({ message: "This session has expired. Please login" })
+
+            const { id } = decoded
+            const user = await User.findById(id)
+            const { password, ...data } = user._doc
+            req.user = data
+            next()
+        })
     } catch (err) {
-        if (!refreshToken) {
-            return res.status(401).send('Access Denied. No refresh token provided.');
-        }
-
-        try {
-            const decoded = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
-            const newAccessToken = jwt.sign({ user: decoded.user }, JWT_SECRET, { expiresIn: '1h' });
-
-            res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'strict' });
-            res.setHeader('Authorization', newAccessToken);
-            req.user = decoded;
-            next();
-        } catch (err) {
-            return res.status(400).send('Invalid Token.');
-        }
+        res.status(500).json({
+            status: "error",
+            code: 500,
+            data: [],
+            message: "Internal Server Error",
+        });
     }
 };
 
-module.exports = authenticateToken;
+module.exports = verifyToken;
