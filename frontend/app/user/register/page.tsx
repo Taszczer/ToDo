@@ -15,7 +15,8 @@ export default function SignIn() {
     })
 
     const mutation = useMutation({
-        mutationFn: signIn
+        mutationFn: signIn,
+        onError:(error) => console.log(error)
     })
 
     const onSubmit = (data:CreateSigninSchema) => {
