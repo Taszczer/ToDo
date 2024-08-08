@@ -55,9 +55,9 @@ router.post("/login", async (req, res) => {
         const user = await User.findOne({ email }).select('+password');
         const { ...user_data } = user?._doc
 
-        const isUserExist = await User.findOne({
-            email: email,
-        });
+        // const isUserExist = await User.findOne({
+        //     email: email,
+        // });
 
         if (!user) {
             return res.status(400).json({
@@ -83,12 +83,18 @@ router.post("/login", async (req, res) => {
         const token = user.generateAccessJWT()
         res.cookie("SessionID", token, options)
 
-        res.status(200).json({
-            status: "success",
-            data: [user_data],
-            token: token,
-            message: "Login successful",
-        });
+        res
+            .cookie("access_token", token, {
+                httpOnly: true,
+                //secure: process.env.NODE_ENV === "production",
+            })
+            .status(200)
+            .json({
+                status: "success",
+                data: [user_data],
+                token: token,
+                message: "Login successful",
+            });
 
     } catch (error) {
         console.error("Error during login:", error);
