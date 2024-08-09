@@ -9,7 +9,6 @@ function verifyToken(req, res, next) {
     try {
         const token = req.cookies.access_token
 
-        localStorage
         if (!token) return res.status(401).json({ error: 'Access denied, token missing' });
 
         jwt.verify(token, JWT_SECRET, async (err, decoded) => {

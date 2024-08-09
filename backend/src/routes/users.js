@@ -3,6 +3,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const express = require("express");
 const User = require('../models/user');
+const cookieParser = require('cookie-parser')
 // const { Register, Login } = require("../controllers/auth.js");
 // const { check } = require("express-validator");
 //const authenticateToken = require("../middlewares/authMiddleware.js");
@@ -81,12 +82,13 @@ router.post("/login", async (req, res) => {
         }
 
         const token = user.generateAccessJWT()
-        res.cookie("SessionID", token, options)
+        res.cookie("jwt", token, options)
 
+        console.log(req.cookies.jwt)
         res
             .cookie("access_token", token, {
                 httpOnly: true,
-                //secure: process.env.NODE_ENV === "production",
+                maxAge: 3 * 24 * 60 * 60 * 1000
             })
             .status(200)
             .json({

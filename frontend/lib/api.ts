@@ -53,9 +53,9 @@ export async function deleteNote(id: any) {
 }
 
 export async function login(body: CreateLoginSchema){
-    return await axios.post("http://localhost:5000/login", body);
+    await axios.post("http://localhost:5000/login", body);
     //localStorage.setItem('token', res.data.token)
-    // return await whoAmI();
+    return await whoAmI();
 }
 
 export async function signIn(body:CreateSigninSchema): Promise<User | null> {
