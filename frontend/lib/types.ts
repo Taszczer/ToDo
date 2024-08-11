@@ -5,7 +5,8 @@ export type User = {
     firstName: string
     lastName: string
     email: string
-    password:string
+    password: string
+    jwt_token:string
 }
 
 export type Post = {
@@ -45,7 +46,7 @@ export const createSigninSchema = z.object({
 
 export const createLoginSchema = z.object({
     email:z.string().min(1, {message: "This field has to be filled."}).email("This is not a valid email."),
-    password:z.string().min(4, {message: "Password must be longer than 4 characters"})
+    password: z.string().min(4, { message: "Password must be longer than 4 characters" })
 })
 
 export type CreateSchema = z.infer<typeof createSchema>

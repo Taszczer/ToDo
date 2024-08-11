@@ -56,10 +56,6 @@ router.post("/login", async (req, res) => {
         const user = await User.findOne({ email }).select('+password');
         const { ...user_data } = user?._doc
 
-        // const isUserExist = await User.findOne({
-        //     email: email,
-        // });
-
         if (!user) {
             return res.status(400).json({
                 status: "failed",
@@ -84,9 +80,8 @@ router.post("/login", async (req, res) => {
         const token = user.generateAccessJWT()
         res.cookie("jwt", token, options)
 
-        console.log(req.cookies.jwt)
         res
-            .cookie("access_token", token, {
+            .cookie("jwt_authorization", token, {
                 httpOnly: true,
                 maxAge: 3 * 24 * 60 * 60 * 1000
             })
