@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { CreateLoginSchema, CreateSigninSchema } from "./types";
+import { CreateLoginSchema, CreateSigninSchema, User } from "./types";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
@@ -9,7 +9,7 @@ const cookies = new Cookies();
 export const API_BASE_URL = "http://localhost:5000";
 
 axios.interceptors.request.use((config) => {
-    const token = cookies.get('jwt_authorization') || localStorage.getItem('jwt_authorization');
+    const token = cookies.get('jwt_authorization')
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -28,10 +28,9 @@ export async function deleteNote(id: any) {
 
 export async function login(body: CreateLoginSchema) {
     try {
-        const response = await axios.post(`${API_BASE_URL}/login`, body);
-        console.log('API Response:', response.data);
+        const res = await axios.post(`${API_BASE_URL}/login`, body);
         
-        cookies.set("jwt_authorization", response.data.token, { path: '/' });
+        cookies.set("jwt_authorization", res.data.token, { path: '/' });
 
         await whoAmI(); 
     } catch (error) {
@@ -42,25 +41,32 @@ export async function login(body: CreateLoginSchema) {
 
 export async function signIn(body: CreateSigninSchema) {
     try {
-        const response = await axios.post(`${API_BASE_URL}/register`, body);
-        return response.data;
+        const res = await axios.post(`${API_BASE_URL}/register`, body);
+        return res.data;
     } catch (error) {
         console.error("Sign-in error:", error);
         throw error;
     }
 }
 
-export async function whoAmI() {
+export async function logOut() {
     try {
-        const response = await axios.get(`${API_BASE_URL}/whoami`, {
+        await axios.delete(`http://localhost:5000/logout`, { withCredentials: true });
+        console.log("done")
+    } catch (err){
+        console.log(err)
+    }
+}
+
+export async function whoAmI():Promise<User | null> {
+    try {
+        const res = await axios.get(`${API_BASE_URL}/whoami`, {
             withCredentials: true,
             headers: {
                 'Authorization': `Bearer ${cookies.get('jwt_authorization')}`
             }
         });
-        
-        console.log("whoAmI response:", response.data);
-        return response.data;
+        return res.data;
     } catch (error) {
         console.error("WhoAmI error:", error);
         return null;

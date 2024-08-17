@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const express = require("express");
 const User = require('../models/user');
 const cookieParser = require('cookie-parser')
+const session = require('express-session')
 // const { Register, Login } = require("../controllers/auth.js");
 // const { check } = require("express-validator");
 //const authenticateToken = require("../middlewares/authMiddleware.js");
@@ -72,20 +73,13 @@ router.post("/login", async (req, res) => {
                 message: "Password doesn't match",
             });
         }
-        const options = {
-            maxAge: 20 * 60 * 1000,
-            httpOnly: true, // Ensure this is set for security
-            secure: process.env.NODE_ENV === 'production', // Only set in production
-            sameSite: 'strict' // Adjust as necessary
-        };
-
         const token = user.generateAccessJWT()
-        res.cookie("access_token", token, options)
 
         res
             .cookie("jwt_authorization", token, {
                 httpOnly: true,
-                maxAge: 3 * 24 * 60 * 60 * 1000
+                maxAge: 3 * 24 * 60 * 60 * 1000,
+                secure: process.env.NODE_ENV === 'production', // Only set in production
             })
             .status(200)
             .json({
@@ -105,6 +99,16 @@ router.post("/login", async (req, res) => {
         });
     }
 });
+
+router.delete("/logout", (req, res) => {
+    res.clearCookie("jwt_authorization", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        path: '/'
+    })
+
+    res.status(200).send("Logout successful")
+})
 
 router.get('/whoami', verifyToken, (req, res) => {
     res.status(200).json({

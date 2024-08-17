@@ -1,11 +1,14 @@
+"use client"
+
 import React from 'react';
-// import { useUser } from './providers/AuthProvider';
+import { useUser } from './providers/AuthProvider';
 import Link from 'next/link';
+import { logOut } from '@/lib/api';
 
 export default function Navbar() {
-    // const user = useUser();
+    const user = useUser();
 
-    // if (user) {
+    if (!user) {
         return (
             <div className='absolute right-52 flex justify-end items-center'>
                 <div className='flex gap-24'>
@@ -14,7 +17,13 @@ export default function Navbar() {
                 </div>
             </div>
         );
-    // } else {
-    //   return <p className='absolute right-10 text-black'>{ user?.user.firstName }</p>; // Display logged-in state
-    //}
+    } else {
+        return (
+            <div className='absolute right-52 flex justify-end items-center'>
+                <div className='flex gap-24'>
+                    <button onClick={() => logOut()}>Log Out</button>
+                </div>
+            </div>
+        ); 
+    }
 }
