@@ -7,20 +7,23 @@ const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
     try {
-        const token = req.cookies.access_token
+        const token = req.cookies.jwt_authorization;
+        console.log("Token from cookies:", token);
 
         if (!token) return res.status(401).json({ error: 'Access denied, token missing' });
 
         jwt.verify(token, JWT_SECRET, async (err, decoded) => {
-            if (err) return res.status(401).json({ message: "This session has expired. Please login" })
+            if (err) return res.status(401).json({ message: "This session has expired. Please login" });
 
-            const { id } = decoded
-            const user = await User.findById(id)
-            const { password, ...data } = user._doc
-            req.user = data
-            next()
-        })
+            const { id } = decoded;
+            const user = await User.findById(id);
+            if (!user) return res.status(404).json({ message: "User not found" });
+            const { password, ...data } = user._doc;
+            req.user = data;
+            next();
+        });
     } catch (err) {
+        console.error("Token verification error:", err);
         res.status(500).json({
             status: "error",
             code: 500,
@@ -28,6 +31,6 @@ function verifyToken(req, res, next) {
             message: "Internal Server Error",
         });
     }
-};
+}
 
 module.exports = verifyToken;

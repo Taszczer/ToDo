@@ -74,11 +74,13 @@ router.post("/login", async (req, res) => {
         }
         const options = {
             maxAge: 20 * 60 * 1000,
-            httpOnly: true
-        }
+            httpOnly: true, // Ensure this is set for security
+            secure: process.env.NODE_ENV === 'production', // Only set in production
+            sameSite: 'strict' // Adjust as necessary
+        };
 
         const token = user.generateAccessJWT()
-        res.cookie("jwt", token, options)
+        res.cookie("access_token", token, options)
 
         res
             .cookie("jwt_authorization", token, {
