@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 function verifyToken(req, res, next) {
     try {
         const token = req.cookies.jwt_authorization;
-        console.log("Token from cookies:", token);
 
         if (!token) return res.status(401).json({ error: 'Access denied, token missing' });
 
@@ -33,4 +32,15 @@ function verifyToken(req, res, next) {
     }
 }
 
-module.exports = verifyToken;
+
+function authRole(role) {
+    return (req, res, next) => {
+        if (role !== req.user.role) {
+            res.status(401).send("You are not allowed to visit this page")
+        } else {
+            next()
+        }
+    }
+}
+
+module.exports = { verifyToken, authRole };

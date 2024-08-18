@@ -5,13 +5,9 @@ const express = require("express");
 const User = require('../models/user');
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-// const { Register, Login } = require("../controllers/auth.js");
-// const { check } = require("express-validator");
-//const authenticateToken = require("../middlewares/authMiddleware.js");
-const jwt = require('jsonwebtoken');
-const verifyToken = require('../middlewares/authMiddleware');
 
-const { JWT_SECRET, REFRESH_TOKEN_SECRET } = process.env;
+const { verifyToken, authRole } = require('../middlewares/authMiddleware');
+
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -79,7 +75,7 @@ router.post("/login", async (req, res) => {
             .cookie("jwt_authorization", token, {
                 httpOnly: true,
                 maxAge: 3 * 24 * 60 * 60 * 1000,
-                secure: process.env.NODE_ENV === 'production', // Only set in production
+                secure: process.env.NODE_ENV === 'production'
             })
             .status(200)
             .json({
@@ -108,6 +104,10 @@ router.delete("/logout", (req, res) => {
     })
 
     res.status(200).send("Logout successful")
+})
+
+router.get('/admin', verifyToken, authRole("admin"), (req, res) => {
+    res.status(200).send("Admin Page")
 })
 
 router.get('/whoami', verifyToken, (req, res) => {

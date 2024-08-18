@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema({
         select: false,
         max: 30,
     },
+    role: {
+        type: String,
+        required: true,
+        default: "user"
+    }
 },
     { timestamps: true }
 )

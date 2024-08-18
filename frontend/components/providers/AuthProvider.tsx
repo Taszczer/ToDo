@@ -4,12 +4,13 @@ import { resumeSession } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUser() {
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["user"],
         queryFn: resumeSession,
         staleTime: Infinity,
     });
 
+    if(isLoading)return <p>loading</p>
     return data
 }
 

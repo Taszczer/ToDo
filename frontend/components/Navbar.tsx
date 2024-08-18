@@ -7,6 +7,7 @@ import { logOut } from '@/lib/api';
 
 export default function Navbar() {
     const user = useUser();
+    console.log(user)
 
     if (!user) {
         return (

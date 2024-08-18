@@ -7,22 +7,22 @@ import NoteBook from "./notes/page";
 import Navbar from '@/components/Navbar';
 
 export default function Home() {
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 200);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 200);
+    return () => clearTimeout(timer);
+  }, []);
 
-  // if (loading) {
-  //   return (
-  //     <div className='flex justify-center items-center h-full'>
-  //       <img src="/loader.gif" alt="afdadf" width={200} height={200} />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <img src="/loader.gif" alt="afdadf" width={200} height={200} />
+      </div>
+    );
+  }
 
   return (
     <main>
