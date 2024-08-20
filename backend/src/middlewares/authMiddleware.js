@@ -32,6 +32,15 @@ function verifyToken(req, res, next) {
     }
 }
 
+function canView(userId) {
+    return (req, res, next) => {
+        if (userId !== req.user._id) {
+            res.status(401).send("You are not allowed to visit this page")
+        } else {
+            next()
+        }
+    }
+}
 
 function authRole(role) {
     return (req, res, next) => {
@@ -43,4 +52,4 @@ function authRole(role) {
     }
 }
 
-module.exports = { verifyToken, authRole };
+module.exports = { verifyToken, authRole, canView };

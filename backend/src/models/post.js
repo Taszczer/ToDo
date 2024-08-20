@@ -6,6 +6,7 @@ const postSchema = new mongoose.Schema({
     description: String,
     start_time: Date,
     end_time: Date,
+    userId: String
 });
 
 const Post = db1.model('Post', postSchema);

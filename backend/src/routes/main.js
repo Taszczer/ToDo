@@ -1,8 +1,9 @@
 const express = require('express');
 const Post = require('../models/post');
+const { verifyToken, canView } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
-router.post('/posts/create', async (req, res) => {
+router.post('/posts/create', verifyToken, async (req, res) => {
     const { title, description, start_time, end_time } = req.body;
     try {
         const newPost = new Post({
@@ -10,6 +11,7 @@ router.post('/posts/create', async (req, res) => {
             description,
             start_time,
             end_time,
+            userId: req.user._id
         });
 
         await newPost.save();
@@ -20,9 +22,9 @@ router.post('/posts/create', async (req, res) => {
     }
 });
 
-router.get('/posts', async (req, res) => {
+router.get('/posts', verifyToken, canView, async (req, res) => {
     try {
-        const posts = await Post.find({});
+        const posts = await Post.find();
         res.status(200).json(posts);
     } catch (err) {
         res.status(500).send(`Error getting posts: ${err.message}`);
