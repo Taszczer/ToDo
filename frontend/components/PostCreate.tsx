@@ -10,31 +10,44 @@ import { toast } from 'sonner';
 import { Button } from '@/components/Button';
 import Input from './Input';
 
+import { useEffect, useState } from 'react';
+
 export default function CreatePost() {
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  }, []);
 
   const { register, handleSubmit, formState: { isSubmitting } } = useForm<CreateSchema>({
     resolver: zodResolver(createSchema)
   });
 
   const mutation = useMutation({
-    mutationFn: (newToDo: CreateSchema) => {
-      return axios.post('http://localhost:5000/posts/create', newToDo);
+    mutationFn: (newPost: CreateSchema & { userId: string }) => {
+      return axios.post('http://localhost:5000/posts/create', newPost);
     },
     onSuccess: () => {
       toast.success('Zadanie zostało stworzone');
-      window.location.reload()
+      window.location.reload();
     },
     onError: (error) => {
       toast.error("Coś poszło nie tak");
       console.log(error);
     }
-    
   });
 
   const onSubmit = (data: CreateSchema) => {
-    mutation.mutate({ ...data });
+    if (!userId) {
+      toast.error("User not logged in");
+      return;
+    }
+
+    mutation.mutate({ ...data, userId });
   };
-  
 
   return (
     <div className='flex flex-col items-center'>

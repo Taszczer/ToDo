@@ -29,16 +29,17 @@ export async function deleteNote(id: any) {
 export async function login(body: CreateLoginSchema) {
     try {
         const res = await axios.post(`${API_BASE_URL}/login`, body);
-        
+
         cookies.set("jwt_authorization", res.data.token, { path: '/' });
 
+        const user = res.data.data[0];
+        localStorage.setItem("userId", user._id);
         await whoAmI(); 
     } catch (error) {
         console.error("Login error:", error);
         throw error;
     }
 }
-
 export async function signIn(body: CreateSigninSchema) {
     try {
         const res = await axios.post(`${API_BASE_URL}/register`, body);

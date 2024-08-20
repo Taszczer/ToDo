@@ -22,14 +22,15 @@ router.post('/posts/create', verifyToken, async (req, res) => {
     }
 });
 
-router.get('/posts', verifyToken, canView, async (req, res) => {
+router.get('/posts', verifyToken, async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find({ userId: req.user._id });
         res.status(200).json(posts);
     } catch (err) {
         res.status(500).send(`Error getting posts: ${err.message}`);
     }
 });
+
 
 router.get('/posts/:id', async (req, res) => {
     try {
