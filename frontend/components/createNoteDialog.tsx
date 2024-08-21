@@ -1,7 +1,7 @@
 "use client"
 
 import { Dialog, DialogTitle } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Transition } from '@headlessui/react'
 import Input from "@/components/Input"
 import { createNoteSchema, CreateNoteSchema } from "@/lib/types"
@@ -15,6 +15,15 @@ import { Button } from './Button'
 
 export default function CreateNoteDialog({ isOpen, setIsOpen }: any) {
 
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  }, []);
+
     const router = useRouter()
 
     const { register, handleSubmit, formState:{isSubmitting} } = useForm<CreateNoteSchema>({
@@ -22,8 +31,8 @@ export default function CreateNoteDialog({ isOpen, setIsOpen }: any) {
     })
 
     const mutation = useMutation({
-        mutationFn: async (newNote: CreateNoteSchema) => {
-            return axios.post("http://localhost:5000/notes/upload", newNote)
+        mutationFn: async (newNote: CreateNoteSchema & { userId: string }) => {
+        return axios.post("http://localhost:5000/notes/upload", newNote, {withCredentials:true})
         },
 
         onSuccess: () => {
@@ -37,8 +46,13 @@ export default function CreateNoteDialog({ isOpen, setIsOpen }: any) {
         }
     })
 
-    const onSubmit = (data:CreateNoteSchema) => {
-        mutation.mutate({...data})
+  const onSubmit = (data: CreateNoteSchema) => {
+      if (!userId) {
+        toast.error("User not logged in");
+        return;
+      }
+
+        mutation.mutate({...data, userId})
     }
 
   return (

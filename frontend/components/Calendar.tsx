@@ -23,7 +23,7 @@ export default function ResourceCalendar() {
     }
   });
 
-  const events = (data || []).map((post: Post) => {
+    const events = (data || []).map((post: Post) => {
     const startTime = new Date(post.start_time).getTime();
     const endTime = new Date(post.end_time).getTime();
     const durationInHours = (endTime - startTime) / (1000 * 60 * 60);

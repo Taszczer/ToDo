@@ -15,7 +15,8 @@ export default function NoteBook() {
     const { data, isLoading, error } = useQuery({
         queryKey: ['notes'],
         queryFn: async () => {
-            return (await axios.get<TNote[]>("http://localhost:5000/notes")).data
+            const res = await axios.get<TNote[]>("http://localhost:5000/notes", { withCredentials: true })
+            return res.data
         }
     })
 

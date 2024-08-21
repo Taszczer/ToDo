@@ -8,10 +8,9 @@ const NoteSchema = new mongoose.Schema({
     descriptionText: {
         type: String,
     },
-    // createdAt: {
-    //     type: Date,
-    //     default: Date.now
-    // }
+    userId: {
+        type: String
+    }
 })
 
 const Note = db2.model('Note', NoteSchema)

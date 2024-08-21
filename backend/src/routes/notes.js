@@ -1,12 +1,13 @@
 const express = require('express');
 const Note = require('../models/note');
+const { verifyToken } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 
-router.post("/notes/upload", async (req, res) => {
+router.post("/notes/upload", verifyToken, async (req, res) => {
     const { title } = req.body
     try {
-        const newNote = new Note({ title })
+        const newNote = new Note({ title, userId: req.user._id })
         await newNote.save()
         res.status(201).send(newNote)
     } catch (err) {
@@ -14,9 +15,9 @@ router.post("/notes/upload", async (req, res) => {
     }
 })
 
-router.get("/notes", async (req, res) => {
+router.get("/notes", verifyToken, async (req, res) => {
     try {
-        const notes = await Note.find({})
+        const notes = await Note.find({ userId: req.user._id })
         res.status(200).json(notes)
     } catch (err) {
         res.status(500).send(`Your error is ${err}`)
