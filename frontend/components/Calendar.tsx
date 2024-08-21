@@ -18,7 +18,7 @@ export default function ResourceCalendar() {
   const { isLoading, data, error } = useQuery({
     queryKey: ['todo'],
     queryFn: async () => {
-      const response = await axios.get<Post[]>('http://localhost:5000/posts')
+      const response = await axios.get<Post[]>('http://localhost:5000/posts', {withCredentials:true})
       return response.data;
     }
   });

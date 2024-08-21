@@ -33,9 +33,8 @@ function verifyToken(req, res, next) {
 }
 
 function canView(req, res, next) {
-    const { id } = req.params; // Assuming the post ID is in the URL params
+    const { id } = req.params;
 
-    // Find the post/task by ID
     Post.findById(id, (err, post) => {
         if (err) {
             return res.status(500).send("Error fetching post");
@@ -45,12 +44,10 @@ function canView(req, res, next) {
             return res.status(404).send("Post not found");
         }
 
-        // Check if the user is the creator of the post
         if (post.userId !== req.user._id.toString()) {
             return res.status(401).send("You are not allowed to view this post");
         }
 
-        // Allow access if the user is the creator
         next();
     });
 }
