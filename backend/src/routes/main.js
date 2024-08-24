@@ -31,7 +31,6 @@ router.get('/posts', verifyToken, async (req, res) => {
     }
 });
 
-
 router.get('/posts/:id', async (req, res) => {
     try {
         const postId = await Post.findById(req.params.id);
