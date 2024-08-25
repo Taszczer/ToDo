@@ -28,7 +28,6 @@ export default function SignIn() {
         mutationFn: signIn,
         onError: (error) => console.log(error),
         onSuccess: () => {
-            toast.success("You have successfully registered.");
             router.push("/")
         }
     });
@@ -75,7 +74,7 @@ export default function SignIn() {
                                 <button className="bg-[#266aa5] h-[50px] mt-5 rounded-xl w-full text-white font-bold text-xl" type="submit">Sign up</button>
                             </div> 
                         </form>
-                        <p className="mt-36 text-md text-[#1D1F1C] font-semibold">Are you have an account? <Link href={"/user/login"} className=" font-normal underline text-[#3a3d38] ">Log In here</Link></p>
+                        <p className="mt-36 text-md text-[#1D1F1C] font-semibold">Are you have an account? <Link href={"/"} className=" font-normal underline text-[#3a3d38] ">Log In here</Link></p>
                     </div>
 
                     <div className=" w-[40%] h-[80%] relative mr-10">

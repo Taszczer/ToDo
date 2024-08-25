@@ -26,7 +26,7 @@ export async function deleteNote(id: any) {
     await axios.delete(`http://localhost:5000/notes/delete/${id}`);
 }
 
-export async function login(body: CreateLoginSchema) {
+export async function login(body: CreateLoginSchema): Promise<User | any>{
     try {
         const res = await axios.post(`${API_BASE_URL}/login`, body);
 
@@ -40,10 +40,10 @@ export async function login(body: CreateLoginSchema) {
         throw error;
     }
 }
-export async function signIn(body: CreateSigninSchema) {
+export async function signIn(body: CreateSigninSchema): Promise<User | null> {
     try {
-        const res = await axios.post(`${API_BASE_URL}/register`, body);
-        return res.data;
+        await axios.post(`${API_BASE_URL}/register`, body);
+        return await login(body)
     } catch (error) {
         console.error("Sign-in error:", error);
         throw error;
@@ -67,6 +67,7 @@ export async function whoAmI():Promise<User | null> {
                 'Authorization': `Bearer ${cookies.get('jwt_authorization')}`
             }
         });
+
         return res.data;
     } catch (error) {
         console.error("WhoAmI error:", error);
