@@ -60,7 +60,7 @@ export default function LogIn() {
                             </div>
 
                             <div className="px-6">
-                                <button className="bg-[#eba26a] h-[50px] mt-5 rounded-xl w-full text-white font-bold text-xl" type="submit">Log in</button>
+                                <button className="bg-[#dd955e] h-[50px] mt-5 rounded-xl w-full text-white font-bold text-xl" type="submit">Log in</button>
                             </div> 
                         </form>
                         <p className="mt-36 text-md text-[#1D1F1C] font-semibold">Don't have an account? <Link href={"/user/register"} className=" font-normal underline text-[#3a3d38] ">Sign Up here</Link></p>
