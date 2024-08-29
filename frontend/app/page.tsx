@@ -13,11 +13,10 @@ export default function Home() {
   const user = useUser();
   const router = useRouter();
 
-  useEffect(() => {
     if (!user) {
-      router.push('/user/login'); 
+      router.push('/user/login');
+      window.location.reload()
     }
-  }, [user, router]);
 
   if (!user) {
     return <div>Loading...</div>; 

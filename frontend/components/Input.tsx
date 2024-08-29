@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
         placeholder={placeholder}
         onChange={onChange}
         disabled={disabled}
-        className={`${className} w-[300px] rounded-xl bg-[#e9a977] border-b-4 active:border-0 border-r-orange-secondary border-b-orange-secondary placeholder:text-white placeholder:font-bold border-r-4 px-4 py-1 active:outline-none focus:outline-none`}
+        className={`${className} w-[300px] rounded-xl border-b-4 active:border-0  placeholder:text-white placeholder:font-bold border-r-4 px-4 py-1 active:outline-none focus:outline-none`}
       />
       {error && <p className="error">Polę nie może być puste</p>}
     </div>

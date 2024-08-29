@@ -26,27 +26,34 @@ export async function deleteNote(id: any) {
     await axios.delete(`http://localhost:5000/notes/delete/${id}`);
 }
 
-export async function login(body: CreateLoginSchema): Promise<User | any>{
+export async function login(body: CreateLoginSchema): Promise<User | null> {
     try {
         const res = await axios.post(`${API_BASE_URL}/login`, body);
 
         cookies.set("jwt_authorization", res.data.token, { path: '/' });
 
-        const user = res.data.data[0];
+        const user: User = res.data.data[0];
         localStorage.setItem("userId", user._id);
-        await whoAmI(); 
+
+        return user; 
     } catch (error) {
         console.error("Login error:", error);
-        throw error;
+        return null; 
     }
 }
+
+
 export async function signIn(body: CreateSigninSchema): Promise<User | null> {
     try {
-        await axios.post(`${API_BASE_URL}/register`, body);
-        return await login(body)
+        const res = await axios.post(`${API_BASE_URL}/register`, body);
+        if (res.data) {
+            return await login(body)
+        } else {
+            throw new Error("Registration failed without a response.");
+        }
     } catch (error) {
         console.error("Sign-in error:", error);
-        throw error;
+        return null;  
     }
 }
 
@@ -67,7 +74,6 @@ export async function whoAmI():Promise<User | null> {
                 'Authorization': `Bearer ${cookies.get('jwt_authorization')}`
             }
         });
-
         return res.data;
     } catch (error) {
         console.error("WhoAmI error:", error);

@@ -17,7 +17,7 @@ import { FaEye } from "react-icons/fa";
 
 export default function LogIn() {
 
-    const { register, handleSubmit, formState: { isSubmitting } } = useForm<CreateLoginSchema>({
+    const { register, handleSubmit } = useForm<CreateLoginSchema>({
         resolver:zodResolver(createLoginSchema)
     });
 
@@ -49,18 +49,18 @@ export default function LogIn() {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="relative flex items-center">
                                 <MdOutlineEmail size={30} color="white" className="absolute ml-3 mt-2.5" />
-                                <div className="h-[30px] rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                <Input className="w-[400px] h-[40px] mb-4 pl-16 text-white" label="Email" type="email" placeholder='email' {...register("email")} />
+                                <div className="h-[30px]  rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
+                                <Input className="w-[400px] bg-[#e9a977] border-r-orange-secondary border-b-orange-secondary h-[40px] mb-4 pl-16 text-white" label="Email" type="email" placeholder='email' {...register("email")} />
                             </div>
 
                             <div className="relative flex items-center">
                                 <FaEye size={30} color="white" className="absolute ml-3 mt-2.5" />
                                 <div className="h-[30px] rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                <Input className="w-[400px] h-[40px] mb-4 pl-16 text-white" label="Password" type="password" placeholder='password' {...register("password")} />
+                                <Input className="w-[400px] bg-[#e9a977] border-r-orange-secondary border-b-orange-secondary h-[40px] mb-4 pl-16 text-white" label="Password" type="password" placeholder='password' {...register("password")} />
                             </div>
 
                             <div className="px-6">
-                                <button className="bg-[#dd955e] h-[50px] mt-5 rounded-xl w-full text-white font-bold text-xl" type="submit">Log in</button>
+                                <button className="bg-[#dd955e] border-r-orange-secondary border-b-orange-secondary h-[50px] mt-5 rounded-xl w-full text-white font-bold text-xl" type="submit">Log in</button>
                             </div> 
                         </form>
                         <p className="mt-36 text-md text-[#1D1F1C] font-semibold">Don't have an account? <Link href={"/user/register"} className=" font-normal underline text-[#3a3d38] ">Sign Up here</Link></p>

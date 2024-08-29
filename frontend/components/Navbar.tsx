@@ -3,10 +3,12 @@
 import React from 'react';
 import { useUser } from './providers/AuthProvider';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { logOut } from '@/lib/api';
 
 export default function Navbar() {
     const user = useUser();
+    const router = useRouter()
 
     if (!user) {
         return (
@@ -21,7 +23,10 @@ export default function Navbar() {
         return (
             <div className='absolute right-52 flex justify-end items-center'>
                 <div className='flex gap-24'>
-                    <button onClick={() => logOut()}>Log Out</button>
+                    <button onClick={() => {
+                        router.push('/user/login');
+                        logOut()
+                    }}>Log Out</button>
                 </div>
             </div>
         ); 
