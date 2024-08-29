@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Calendar from "@/components/Calendar";
 import CreatePost from "@/components/PostCreate";
@@ -13,11 +13,15 @@ export default function Home() {
   const user = useUser();
   const router = useRouter();
 
-    if (!user) {
-      router.push('/user/login');
-      window.location.reload()
-    }
+  const [hasRefreshed, setHasRefreshed] = useState(false);
 
+  useEffect(() => {
+    if (!hasRefreshed && user) {
+      setHasRefreshed(true);
+      router.replace(router.asPath); 
+    }
+  }, [user, hasRefreshed, router]);
+  
   if (!user) {
     return <div>Loading...</div>; 
   }

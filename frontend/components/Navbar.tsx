@@ -7,28 +7,29 @@ import { useRouter } from 'next/navigation';
 import { logOut } from '@/lib/api';
 
 export default function Navbar() {
-    const user = useUser();
+    const user = useUser()
     const router = useRouter()
 
-    if (!user) {
-        return (
-            <div className='absolute right-52 flex justify-end items-center'>
-                <div className='flex gap-24'>
-                    <Link href='/user/login' className='font-bold text-xl bg-blue-300 text-white px-6 py-2 rounded-md'>Log in</Link>
-                    <Link href='/user/register' className='font-bold text-xl bg-orange-300 text-white px-6 py-2 rounded-md'>Sign in</Link>
+    console.log(user)
+
+    return (
+        <div className='absolute right-32 flex justify-end items-center'>
+            <div className='flex flex-col gap-1 items-end'>
+                <div className='flex gap-3'>
+                    <h1 className='font-bold text-4xl text-[#4F9FE4]'>{user?.firstName}</h1>
+                    <h1 className='font-bold text-4xl text-[#4F9FE4]'>{user?.lastName}</h1>
                 </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className='absolute right-52 flex justify-end items-center'>
-                <div className='flex gap-24'>
-                    <button onClick={() => {
+
+                <button
+                    className='font-bold text-xl hover:underline text-orange-secondary'
+                    onClick={() => {
                         router.push('/user/login');
                         logOut()
-                    }}>Log Out</button>
-                </div>
+                    }}>    
+                    Log Out
+                </button>
             </div>
-        ); 
-    }
+        </div>
+    ); 
+
 }

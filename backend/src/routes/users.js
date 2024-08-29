@@ -111,11 +111,7 @@ router.get('/admin', verifyToken, authRole("admin"), (req, res) => {
 })
 
 router.get('/whoami', verifyToken, (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        data: req.user,
-        message: 'User information retrieved successfully.',
-    });
+    res.status(200).send(req.user)
 });
 
 module.exports = router;
