@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useUser } from './providers/AuthProvider';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { logOut } from '@/lib/api';
 

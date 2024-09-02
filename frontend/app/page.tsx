@@ -23,7 +23,7 @@ export default function Home() {
   }, [user, hasRefreshed, router]);
   
   if (!user) {
-    return <div>Loading...</div>; 
+    return <LogIn/>; 
   }
 
   return (
