@@ -7,15 +7,15 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Post } from '@/lib/types';
-import { Button } from './Button';
 import { useState } from 'react';
 import SeeMoreDialog from './SeeMoreDialog';
+import { deletePost } from '@/lib/api';
 
 export default function ResourceCalendar() {
 
   let [isOpen, setIsOpen] = useState(false)
 
-  const { isLoading, data, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ['todo'],
     queryFn: async () => {
       const response = await axios.get<Post[]>('http://localhost:5000/posts', {withCredentials:true})
@@ -46,21 +46,30 @@ export default function ResourceCalendar() {
 
     return (
       <div className='h-full'>
-        {durationInHours <= 1 ?
+        {durationInHours <= 2 ?
           (
-            <div className={`flex flex-col h-full justify-between px-4 py-2`}>
-              <Button name='Zobacz więcej' className='flex justify-center items-center' onClick={() => { setIsOpen(true) }} />
-              <SeeMoreDialog isOpen={isOpen} setIsOpen={setIsOpen} title={eventInfo.event.title} description={eventInfo.event.extendedProps.description} time={eventInfo.timeText} />
+            <div className={`flex flex-col h-full items-center justify-center px-4 py-2`}>
+              <button name='Zobacz więcej' className=' text-white font-bold text-xl hover:underline' onClick={() => { setIsOpen(true) }} >Zobacz więcej</button>
+              <SeeMoreDialog isOpen={isOpen} setIsOpen={setIsOpen} id={eventInfo.event.id} title={eventInfo.event.title} description={eventInfo.event.extendedProps.description} time={eventInfo.timeText} />
             </div>
           )
           :
           (
             <div className={`flex flex-col h-full justify-between px-4 py-2`}>
               <div>
-                <p className={`font-bold text-lg`}>{eventInfo.event.title}</p>
+                <p className={`font-bold text-lg `}>{eventInfo.event.title}</p>
                 <p className='font-medium text-md'>{eventInfo.event.extendedProps.description}</p>
               </div>
-              <b>{eventInfo.timeText}</b>
+
+              <div className='flex justify-between'>
+                <b className='flex items-center font-medium text-lg'>{eventInfo.timeText}</b>
+                <button
+                  className='font-bold text-lg'
+                  onClick={() => {
+                    deletePost(eventInfo.event.id)
+                    window.location.reload()
+                  } }>delete</button>
+              </div>
             </div>
           )
           }

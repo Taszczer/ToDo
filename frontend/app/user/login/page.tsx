@@ -27,7 +27,7 @@ export default function LogIn() {
         mutationFn: login,
         onError: (error) => console.log(error),
         onSuccess: () => {
-            toast.success("You have successfully registered.");
+            window.location.reload
             router.push("/")
         }
     });

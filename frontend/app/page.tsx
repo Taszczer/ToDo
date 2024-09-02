@@ -16,14 +16,14 @@ export default function Home() {
   const [hasRefreshed, setHasRefreshed] = useState(false);
 
   useEffect(() => {
-    if (!hasRefreshed && user) {
-      setHasRefreshed(true);
-      router.replace(router.asPath); 
+    if (user) {
+      router.replace("/");
     }
-  }, [user, hasRefreshed, router]);
+  }, [user, router]);
   
   if (!user) {
-    return <LogIn/>; 
+    router.replace("/user/login");
+    return null;
   }
 
   return (
