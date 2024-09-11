@@ -33,10 +33,10 @@ export default function Home() {
         <div className="mt-12 ml-10 max-w-[70%]">
           <Calendar />
         </div>
-        <div className="absolute top-[60%] right-32 border-4 border-orange-secondary py-6 px-2 rounded-xl">
+        <div className="absolute top-[60%] 2xl:top-[90%] right-32 border-4 border-orange-secondary py-6 px-2 rounded-xl">
           <CreatePost />
         </div>
-        <div className="absolute top-32 right-32 min-w-[500px]">
+        <div className="absolute xl:top-32 xl:right-32 2xl:left-32 2xl:top-[90%] min-w-[500px]">
           <NoteBook />
         </div>
       </div>

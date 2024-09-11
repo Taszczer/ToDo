@@ -69,6 +69,7 @@ router.post("/login", async (req, res) => {
                 message: "Password doesn't match",
             });
         }
+
         const token = user.generateAccessJWT()
 
         res

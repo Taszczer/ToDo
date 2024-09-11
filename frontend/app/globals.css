@@ -15,13 +15,27 @@ html{
     width: 100%;
 }
 
-.fc-v-event {
+@media only screen and (min-width: 768px) {
+  .fc .fc-scrollgrid-liquid {
+    max-height: 175%;
+    width: 125%;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .fc .fc-scrollgrid-liquid {
+    max-height: 85%;
+    width: 100%;
+  }
+}
+
+/* .fc-v-event {
     background-color: #F9C784;
     border-width: 0 4px 4px 0 ;
     border-color: #FF8C42;
     border-radius: 5%;
     display: block;
-}
+} */
 
 .fc-direction-ltr{
     color: #FF8C42;
@@ -61,7 +75,6 @@ html{
 }
 
 .tiptap-content {
-    /* List styles */
     ul, 
     ol {
       padding: 0 1rem;
