@@ -10,11 +10,16 @@ html{
   height: 100%;
 }
 
-.fc .fc-scrollgrid-liquid {
-    max-height: 85%;
-    width: 100%;
+.fc{
+  max-width: 1500px;
+  height: 1100px;
 }
 
+.fc .fc-scrollgrid-liquid {
+    width: 1500px;
+    max-width: 1500px;
+}
+/* 
 @media only screen and (min-width: 768px) {
   .fc .fc-scrollgrid-liquid {
     max-height: 175%;
@@ -27,7 +32,7 @@ html{
     max-height: 85%;
     width: 100%;
   }
-}
+} */
 
 /* .fc-v-event {
     background-color: #F9C784;
@@ -47,7 +52,8 @@ html{
 
 .fc-header-toolbar .fc-toolbar {
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;  
+    width: 1500px; 
 }
 
 .fc-toolbar-title{
