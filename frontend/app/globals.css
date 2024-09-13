@@ -10,74 +10,58 @@ html{
   height: 100%;
 }
 
-.fc{
-  max-width: 1500px;
-  height: 1100px;
+.fc {
+  width: 100%; 
+  height: 100%; 
 }
 
 .fc .fc-scrollgrid-liquid {
-    width: 1500px;
-    max-width: 1500px;
+  width: 100%;
+  max-width: 100%; 
 }
-/* 
-@media only screen and (min-width: 768px) {
+
+@media only screen and (max-width: 1536px) {
   .fc .fc-scrollgrid-liquid {
-    max-height: 175%;
-    width: 125%;
+    width: 100%; 
   }
 }
 
-@media only screen and (min-width: 1280px) {
-  .fc .fc-scrollgrid-liquid {
-    max-height: 85%;
-    width: 100%;
+@media only screen and (max-width: 1024px) {
+  .fc {
+    max-width: 100vw; 
   }
-} */
+}
 
-/* .fc-v-event {
-    background-color: #F9C784;
-    border-width: 0 4px 4px 0 ;
-    border-color: #FF8C42;
-    border-radius: 5%;
-    display: block;
-} */
-
-.fc-direction-ltr{
-    color: #FF8C42;
+.fc-direction-ltr {
+  color: #FF8C42;
 }
 
 .fc-theme-standard .fc-scrollgrid {
-    border: 0
+  border: 0;
 }
 
-.fc-header-toolbar .fc-toolbar {
-    display: flex;
-    justify-content: space-between;  
-    width: 1500px; 
-}
-
-.fc-toolbar-title{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: large;
+.fc-toolbar-title {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: large;
 }
 
 .fc .fc-button-primary {
-    background-color: #FCE3C2;
-    border-color: #FCE3C2;
-    color: white;
+  background-color: #FCE3C2;
+  border-color: #FCE3C2;
+  color: white;
 }
 
 .fc .fc-button-primary:hover {
-    background-color: #FF8C42;
-    border-color: #FF8C42;
-    color: white;
+  background-color: #FF8C42;
+  border-color: #FF8C42;
+  color: white;
 }
 
-.my-custom-class{
-    background-color: #f0f0f0;
-    padding: 5px 0px 5px 8px;
-    border-radius: 10px;
-    font-size: 15px;
+.my-custom-class {
+  background-color: #f0f0f0;
+  padding: 5px 8px;
+  border-radius: 10px;
+  font-size: 15px;
 }
 
 .tiptap-content {

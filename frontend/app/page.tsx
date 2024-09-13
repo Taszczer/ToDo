@@ -1,19 +1,16 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Calendar from "@/components/Calendar";
 import CreatePost from "@/components/PostCreate";
 import NoteBook from "./notes/page";
 import Navbar from '@/components/Navbar';
 import { useUser } from '@/components/providers/AuthProvider';
-import LogIn from './user/login/page';
 
 export default function Home() {
   const user = useUser();
   const router = useRouter();
-
-  const [hasRefreshed, setHasRefreshed] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -27,18 +24,19 @@ export default function Home() {
   }
 
   return (
-    <main className='h-full'>
+    <main className='h-full overflow-y-auto'>
       <div className="max-w-[100%]">
         <Navbar />
-        <div className='flex justify-between'>
-          <div className="mt-12 ml-10 ">
+        <div className='flex flex-col 2xl:flex-row justify-between'>
+          <div className="2xl:ml-10 w-full 2xl:w-auto">
             <Calendar />
           </div>
-          <div className='flex flex-col justify-between items-end mr-36'>
-            <div className="max-w-[375px] max-h-[425px] border-4 border-orange-secondary py-6 px-2 rounded-xl mt-28  ">
+          
+          <div className='hidden 2xl:flex 2xl:flex-col justify-between items-center max-w-[100%] 2xl:items-end my-28 mr-36'>
+            <div className="max-w-[375px] max-h-[425px] border-4 border-orange-secondary py-6 px-2 rounded-xl mt-28">
               <CreatePost />
             </div>
-            <div className=" min-w-[500px]">
+            <div className="min-w-[500px]">
               <NoteBook />
             </div>
           </div>
