@@ -24,15 +24,15 @@ export default function Home() {
   }
 
   return (
-    <main className='h-full overflow-y-auto'>
+    <main className='h-screen overflow-y-auto'>
       <div className="max-w-[100%]">
         <Navbar />
-        <div className='flex flex-col 2xl:flex-row justify-between'>
-          <div className="2xl:ml-10 w-full 2xl:w-auto">
+        <div className='flex flex-col 2xl:flex-row justify-between h-full'>
+          <div className="2xl:ml-10 w-full 2xl:w-auto h-full max-h-screen overflow-y-auto">
             <Calendar />
           </div>
-          
-          <div className='hidden 2xl:flex 2xl:flex-col justify-between items-center max-w-[100%] 2xl:items-end my-28 mr-36'>
+  
+          <div className='hidden 2xl:flex 2xl:flex-col justify-between items-center max-w-[100%] 2xl:items-end my-28 ml-11 mr-32'>
             <div className="max-w-[375px] max-h-[425px] border-4 border-orange-secondary py-6 px-2 rounded-xl mt-28">
               <CreatePost />
             </div>

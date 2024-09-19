@@ -97,8 +97,8 @@ export default function ResourceCalendar() {
         events={events}
         resourceAreaWidth='300px'
         resourceAreaHeaderContent='Resources'
-        height="auto" // Makes the calendar height dynamic
-        contentHeight="auto" // Adjusts the content height based on events
+        height="auto"
+        contentHeight="auto" 
       />
     </div>
   );
