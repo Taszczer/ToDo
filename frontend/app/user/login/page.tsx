@@ -39,24 +39,24 @@ export default function LogIn() {
     return (
         <>
             <div className=" flex items-center justify-center bg-[#EEE5DE] h-full">
-                <div className=" flex items-center justify-between bg-white w-[50%] h-[65%] rounded-[35px]">
-                    <div className="h-[700px] w-[1200px] relative mr-10">
+                <div className=" flex items-center justify-between bg-white w-[85%] md:w-[70%] lg:min-w-[616px] lg:w-[52.5%] h-[65%] rounded-[35px]">
+                    <div className="h-[90%] w-[1200px] hidden 2xl:block relative mr-10">
                         <Image src={"/logInImage.jpg"} alt="keep on" layout="fill" objectFit="cover" className=" ml-10 rounded-3xl" />
                     </div>
 
-                    <div className=" flex flex-col items-center w-full mx-28 h-[500px]">
-                        <h1 className=" font-bold text-5xl text-[#1D1F1C] mb-12 ">Login</h1>
+                    <div className=" flex flex-col items-center w-full lg:mx-28 h-[500px]">
+                        <h1 className=" font-bold text-4xl md:text-5xl text-[#1D1F1C] mb-12">Login</h1>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="relative flex items-center">
                                 <MdOutlineEmail size={30} color="white" className="absolute ml-3 mt-2.5" />
                                 <div className="h-[30px]  rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                <Input className="w-[400px] bg-[#e9a977] border-r-orange-secondary border-b-orange-secondary h-[40px] mb-4 pl-16 text-white" label="Email" type="email" placeholder='email' {...register("email")} />
+                                <Input className=" w-[250px] md:w-[400px] bg-[#e9a977] border-r-orange-secondary border-b-orange-secondary h-[40px] mb-4 pl-16 text-white" label="Email" type="email" placeholder='email' {...register("email")} />
                             </div>
 
                             <div className="relative flex items-center">
                                 <FaEye size={30} color="white" className="absolute ml-3 mt-2.5" />
                                 <div className="h-[30px] rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                <Input className="w-[400px] bg-[#e9a977] border-r-orange-secondary border-b-orange-secondary h-[40px] mb-4 pl-16 text-white" label="Password" type="password" placeholder='password' {...register("password")} />
+                                <Input className=" w-[250px] md:w-[400px] bg-[#e9a977] border-r-orange-secondary border-b-orange-secondary h-[40px] mb-4 pl-16 text-white" label="Password" type="password" placeholder='password' {...register("password")} />
                             </div>
 
                             <div className="px-6">
