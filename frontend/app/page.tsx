@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Calendar from "@/components/Calendar";
 import CreatePost from "@/components/PostCreate";
 import NoteBook from "./notes/page";
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/navbar/Navbar';
 import { useUser } from '@/components/providers/AuthProvider';
 
 export default function Home() {

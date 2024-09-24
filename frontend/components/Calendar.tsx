@@ -88,7 +88,7 @@ export default function ResourceCalendar() {
   };
 
   return (
-    <div className='max-h-screen w-full'>
+    <div className='max-h-screen w-full z-10'>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin, resourceTimeGridPlugin]}
         initialView='resourceTimeGridWeek'
