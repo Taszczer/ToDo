@@ -39,33 +39,33 @@ export default function SignIn() {
     return (
         <>
             <div className="flex items-center justify-center bg-[#EBE9D8] h-full">
-                <div className="flex items-center justify-between bg-white w-[50%] h-[65%] rounded-[35px]">
+                <div className="flex items-center justify-center 2xl:justify-between bg-white w-[85%] md:w-[70%] lg:min-w-[616px] lg:w-[52.5%] h-[65%] rounded-[35px]">
                     <div className="flex flex-col items-center w-[60%] h-[600px]">
-                        <h1 className="font-bold text-5xl text-[#1D1F1C] mb-12">Sign Up</h1>
+                        <h1 className="font-bold text-3xl md:text-5xl text-[#1D1F1C] mb-12">Sign Up</h1>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <div className='flex flex-row gap-3'>
+                            <div className='flex flex-col gap-3'>
                                 <div className="relative flex items-center">
                                     <IoPeopleCircle size={30} color='white' className="absolute ml-3 mt-2.5" />
                                     <div className="h-[30px] rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                    <Input className="w-[200px] h-[40px] pl-16 mb-4 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label='First name' type='text' placeholder='first name' {...register("firstName")} />
+                                    <Input className="w-[250px] md:w-[400px] h-[40px] pl-16 mb-4 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label='First name' type='text' placeholder='first name' {...register("firstName")} />
                                 </div>
 
                                 <div className='relative flex items-center'>
                                     <IoPeopleCircleOutline size={30} color='white' className='absolute ml-3 mt-2.5' />
                                     <div className="h-[30px] rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                    <Input className="w-[200px] h-[40px] pl-16 mb-4 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label='Last name' type='text' placeholder='last name' {...register("lastName")} />
+                                    <Input className="w-[250px] md:w-[400px] h-[40px] pl-16 mb-4 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label='Last name' type='text' placeholder='last name' {...register("lastName")} />
                                 </div>
                             </div>
                             <div className="relative flex items-center">
                                 <MdOutlineEmail size={30} color="white" className="absolute ml-3 mt-2.5" />
                                 <div className="h-[30px] rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                <Input className="w-[411px] h-[40px] mb-4 pl-16 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label="Email" type="email" placeholder='email' {...register("email")} />
+                                <Input className="w-[250px] md:w-[400px] h-[40px] mb-4 pl-16 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label="Email" type="email" placeholder='email' {...register("email")} />
                             </div>
 
                             <div className="relative flex items-center">
                                 <FaEye size={30} color="white" className="absolute ml-3 mt-2.5" />
                                 <div className="h-[30px] rounded-3xl w-[3px] absolute bg-white ml-[52.5px] mt-2.5"></div>
-                                <Input className="w-[411px] h-[40px] mb-4 pl-16 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label="Password" type="password" placeholder='password' {...register("password")} />
+                                <Input className="w-[250px] md:w-[400px] h-[40px] mb-4 pl-16 text-white bg-[#4F9FE4] border-r-[#266aa5] border-b-[#266aa5]" label="Password" type="password" placeholder='password' {...register("password")} />
                             </div>
 
                             <div className="px-6">
@@ -75,7 +75,7 @@ export default function SignIn() {
                         <p className="mt-36 text-md text-[#1D1F1C] font-semibold">Are you have an account? <Link href={"/"} className="font-normal underline text-[#3a3d38]">Log In here</Link></p>
                     </div>
 
-                    <div className="w-[40%] h-[80%] relative mr-10">
+                    <div className="w-[40%] h-[90%] hidden 2xl:block relative mr-10">
                         <Image src={"/signUp.jpg"} alt="keep on" layout="fill" objectFit="cover" className="mr-10 rounded-3xl" />
                     </div>
                 </div>
