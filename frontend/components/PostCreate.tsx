@@ -50,9 +50,9 @@ export default function CreatePost() {
   };
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col justify-center h-[100%]'>
         <h1 className='text-xl mb-4 text-orange-secondary font-bold'>Tutaj możesz zrobić nowego taska</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col items-center'>
+        <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col h-full justify-center items-center'>
             <div className='gap-5'>
               <Input className=' bg-orange-primary border-b-4 border-r-orange-secondary border-b-orange-secondary ' placeholder='tytuł' type="text" {...register("title")} />
               <textarea className='mt-2 h-[105px] w-full rounded-xl bg-orange-primary border-b-4 border-r-orange-secondary border-b-orange-secondary placeholder:text-white placeholder:font-bold border-r-4 px-4 py-1' placeholder='opis' {...register("description")} />

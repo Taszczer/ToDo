@@ -50,7 +50,7 @@ export default function CreatePost() {
   };
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col h-[100%] justify-center items-center'>
         <h1 className='text-xl mb-4 text-orange-secondary font-bold'>Tutaj możesz zrobić nowego taska</h1>
         <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col items-center'>
             <div className='gap-5'>
