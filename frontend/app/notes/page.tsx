@@ -32,7 +32,6 @@ export default function NoteBook() {
                     {data?.map((note) => (
                         <Link href={`/notes/${note._id}`}>
                             <div key={note._id} className="mt-3 border-2 border-blue-400 p-2 px-4 rounded-2xl">
-                                {/* <img src="" alt="" /> */}
                                 <h1 className="font-bold text-blue-500 capitalize">{note.title}</h1>
                             </div>
                         </Link>

@@ -36,7 +36,7 @@ export default function Home() {
             <div className="max-w-[375px] max-h-[425px] border-4 border-orange-secondary py-6 px-2 rounded-xl mt-28">
               <CreatePost />
             </div>
-            <div className="min-w-[500px]">
+            <div className="sm:min-w-[500px]">
               <NoteBook />
             </div>
           </div>

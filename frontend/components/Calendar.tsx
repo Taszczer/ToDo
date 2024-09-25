@@ -63,7 +63,7 @@ export default function ResourceCalendar() {
             />
           </div>
         ) : (
-          <div className="flex flex-col h-full justify-between px-4 py-2">
+          <div className="flex flex-col h-full justify-between bg-blue-400 px-4 py-2">
             <div>
               <p className="font-bold text-lg">{eventInfo.event.title}</p>
               <p className="font-medium text-md">{eventInfo.event.extendedProps.description}</p>
